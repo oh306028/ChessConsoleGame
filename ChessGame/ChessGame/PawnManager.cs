@@ -23,7 +23,7 @@ namespace ChessGame
 
         public bool MovePawn()
         {
-            if (_pawn.CanMove(rowMove, columnMove))
+            if (_pawn.CanMove(rowMove, columnMove) || _pawn.CanAttack(rowMove, columnMove))
                 return true;
 
             return false;

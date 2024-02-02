@@ -39,12 +39,12 @@ namespace ChessGame
 
         public void ChangeBoardAfterChange(ref char[,] board)
         {
-            if (board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ')
+
+            if (board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ' && !_pawnManager._pawn.CanAttack(_pawnManager.rowMove, _pawnManager.columnMove))
             {
                 Console.WriteLine("Cannot move here");
                 return;
             }
-                
             
 
             if (_pawnManager.MovePawn())

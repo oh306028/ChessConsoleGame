@@ -29,10 +29,10 @@ namespace ChessGame
                 return true;
             
             
-            if(columnPosition != x)
+            if(columnPosition != y)
                 return false;
 
-            if ((rowPosition + 1) != y)
+            if ((rowPosition + 1) != x)
                 return false;
 
             if (y <= 0)
@@ -43,6 +43,16 @@ namespace ChessGame
 
 
             return true;
+
+        }
+
+        public bool CanAttack(int x, int y)
+        {
+
+            if (rowPosition + 1 == x && columnPosition + 1 == y || columnPosition - 1 == y)
+                return true;
+
+            return false;
 
         }
     }

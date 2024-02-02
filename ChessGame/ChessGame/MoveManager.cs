@@ -13,6 +13,14 @@ namespace ChessGame
             rowDirection = x;
             columnDirection = y;
         }
+
+        public bool ValidCordinates()
+        {
+            if (rowDirection > 8 || columnDirection > 8 || columnDirection <= 0 || rowDirection <= 0)
+                return false;
+
+            return true;
+        }
         public int rowDirection { get; set; }
         public int columnDirection { get; set; }
 

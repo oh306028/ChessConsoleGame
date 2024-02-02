@@ -13,6 +13,8 @@ namespace ChessGame
         char symbol { get; set; }
         bool CanMove(int x, int y);
         bool Allive();
+
+        bool CanAttack(int x, int y);
             
 
     }
