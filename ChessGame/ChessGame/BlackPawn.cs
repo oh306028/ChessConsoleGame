@@ -25,7 +25,7 @@ namespace ChessGame
 
         public bool CanMove(int x, int y)
         {
-            if(rowPosition == 2 && (rowPosition + 2) != y)
+            if(rowPosition == 2 && (rowPosition + 2) == x)
                 return true;
             
             
