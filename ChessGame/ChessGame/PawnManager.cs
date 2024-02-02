@@ -9,29 +9,26 @@ namespace ChessGame
 {
     public class PawnManager
     {
-        private IPawn _pawn { get; set; }
-        private GridCreator _grid { get; set; }
-        private int xMove { get; set; }
-        private int yMove { get; set; }
-        public PawnManager(IPawn pawn, GridCreator grid, MoveManager move)
+        public IPawn _pawn { get; set; }
+        public int rowMove { get; set; }
+        public int columnMove { get; set; }
+
+        public PawnManager(IPawn pawn, MoveManager move)
         {
-            _pawn = pawn;
-            _grid = grid;
-            xMove = move.xDirection;
-            yMove = move.yDirection;
+            _pawn = pawn;        
+            rowMove = move.rowDirection;
+            columnMove = move.columnDirection;
         }
                 
 
-        public void Move()
+        public bool MovePawn()
         {
+            if (_pawn.CanMove(rowMove, columnMove))
+                return true;
 
-            if (_pawn.CanMove(xMove, yMove))
-            {
-              var board = _grid.GetBoard();
-                board[xMove, yMove] = _pawn.symbol;
-            }
+            return false;
+
         }
-
 
 
     }

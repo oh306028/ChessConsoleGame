@@ -8,12 +8,12 @@ namespace ChessGame
 {
     public interface IPawn
     {
-        int positionX { get; set; }
-        int positionY { get; set; }
+        int rowPosition { get; set; }
+        int columnPosition { get; set; }
         char symbol { get; set; }
         bool CanMove(int x, int y);
         bool Allive();
             
 
     }
-}
+}   

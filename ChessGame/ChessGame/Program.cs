@@ -7,24 +7,33 @@ class Program
     {
 
 
+
         var gridCreator = new GridCreator();
-
         var chessBoard = gridCreator.InitGrid();
-        gridCreator.ShowBoard();
+
+        var pawn = new BlackPawn(2, 7);
+        var move = new MoveManager(4, 7);
 
 
-        var pawn = new BlackPawn(2, 2);
-        var move = new MoveManager(2, 3);
+
+        var pawnManager = new PawnManager(pawn, move);
+        var gridManager = new GridManager(pawnManager);
+
+        gridManager.ShowBoard(chessBoard);
+
+
+
+
+
+        gridManager.ChangeBoardAfterChange(ref chessBoard);
 
         Console.WriteLine();
         Console.WriteLine();
 
-        var pawnManager = new PawnManager(pawn, gridCreator, move);
-        pawnManager.Move();
+        gridManager.ShowBoard(chessBoard);
 
 
 
-        gridCreator.ShowBoard();
 
 
 

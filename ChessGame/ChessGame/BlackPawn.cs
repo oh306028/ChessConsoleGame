@@ -8,14 +8,14 @@ namespace ChessGame
 {
     public class BlackPawn : IPawn
     {   
-        public int positionX { get; set; }
-        public int positionY { get ; set ; }
+        public int rowPosition { get; set; }
+        public int columnPosition  { get ; set ; }
         public char symbol { get; set; } = 'p';
 
         public BlackPawn(int x, int y)
         {
-            positionX = x;
-            positionY = y;
+            rowPosition = x;
+            columnPosition = y;
         }
 
         public bool Allive()
@@ -25,10 +25,14 @@ namespace ChessGame
 
         public bool CanMove(int x, int y)
         {
-            if(positionX != x)
+            if(rowPosition == 2 && (rowPosition + 2) != y)
+                return true;
+            
+            
+            if(columnPosition != x)
                 return false;
 
-            if (Math.Abs(positionY - y) != 1)
+            if ((rowPosition + 1) != y)
                 return false;
 
             if (y <= 0)

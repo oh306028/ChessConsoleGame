@@ -10,11 +10,11 @@ namespace ChessGame
     {
         public MoveManager(int x, int y)
         {
-            xDirection = x;
-            yDirection = y;
+            rowDirection = x;
+            columnDirection = y;
         }
-        public int xDirection { get; set; }
-        public int yDirection { get; set; }
+        public int rowDirection { get; set; }
+        public int columnDirection { get; set; }
 
     }
 }

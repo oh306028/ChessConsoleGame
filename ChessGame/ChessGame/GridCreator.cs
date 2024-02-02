@@ -2,21 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace ChessGame
 {
     public class GridCreator
     {
-        private Grid _grid = new Grid();
-
-        private char[,] board = new char[9,9];
-
-
         public char[,] InitGrid()
         {
-            
+           char[,] board = new char[9, 9];
 
             board[1, 1] = 'r';
             board[1, 2] = 'n';
@@ -27,7 +21,7 @@ namespace ChessGame
             board[1, 7] = 'n';
             board[1, 8] = 'r';
 
-            for(int i = 1; i < 9; i++)
+            for (int i = 1; i < 9; i++)
             {
                 board[2, i] = 'p';
             }
@@ -66,26 +60,16 @@ namespace ChessGame
             board[7, 0] = '7';
             board[8, 0] = '8';
 
-
-            return board;
-        }
-
-        public void ShowBoard()
-        {
-            for (int i = 0; i < _grid.collumns; i++)
+            for (int i = 3; i < 9 - 2; i++)
             {
-                for (int j = 0; j < _grid.rows; j++)
+                for (int j = 1; j < 9; j++)
                 {
-                    Console.Write(board[i,j]);
+                    board[i, j] = ' ';
                 }
-                Console.WriteLine();
+
             }
-        }
-
-        public char[,] GetBoard()
-        {
             return board;
-        }
 
+        }
     }
 }
