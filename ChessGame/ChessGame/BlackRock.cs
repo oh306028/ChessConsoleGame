@@ -33,6 +33,7 @@ namespace ChessGame
         public bool CanMove(int x, int y)
         {
 
+
             if (rowPosition != x && columnPosition != y)
                 return false;
 

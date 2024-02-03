@@ -27,7 +27,9 @@ namespace ChessGame
         {
             if(rowPosition == 2 && (rowPosition + 2) == x)
                 return true;
-            
+
+            if (rowPosition == x && columnPosition == y)
+                return false;
             
             if(columnPosition != y)
                 return false;

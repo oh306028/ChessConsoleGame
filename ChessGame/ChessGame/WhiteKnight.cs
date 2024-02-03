@@ -33,17 +33,20 @@ namespace ChessGame
 
         public bool CanMove(int x, int y)
         {
-            // x +- 1  && y -+ 2
+
+            if (x == rowPosition && y == columnPosition)
+                return false;
+            
             if (rowPosition - 2 == x && columnPosition - 1 == y || rowPosition - 2 == x && columnPosition + 1 == y)
                 return true;
 
             if (rowPosition + 2 == x && columnPosition + 1 == y || rowPosition + 2 == x && columnPosition - 1 == y)
                 return true;
 
-            if (rowPosition - 1 == x && columnPosition - 2 == y || rowPosition + 1 == x && columnPosition + 2 == y)
+            if (rowPosition - 1 == x && columnPosition - 2 == y || rowPosition + 1 == x && columnPosition - 2 == y)
                 return true;
 
-            if (rowPosition + 1 == x && columnPosition + 2 == y || rowPosition - 2 == x && columnPosition + 1 == y)
+            if (rowPosition + 1 == x && columnPosition + 2 == y || rowPosition - 1 == x && columnPosition + 2 == y)
                 return true;
 
 
