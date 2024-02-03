@@ -10,7 +10,7 @@ namespace ChessGame
     {
         int rowPosition { get; set; }
         int columnPosition { get; set; }
-        char symbol { get; set; }
+        char symbol { get;}
         bool CanMove(int x, int y);
         bool Allive();
 

@@ -45,6 +45,69 @@ namespace ChessGame
                 Console.WriteLine("Cannot move here");
                 return;
             }
+
+            if(_pawnManager._pawn.symbol == 'R' || _pawnManager._pawn.symbol == 'r')
+            {
+                if (_pawnManager.rowMove != _pawnManager._pawn.rowPosition)
+                {
+                    if(_pawnManager._pawn.rowPosition > _pawnManager.rowMove)
+                    {
+                        for (int i = _pawnManager._pawn.rowPosition - 1; i > _pawnManager.rowMove; i--)
+                        {
+                            if (board[i, _pawnManager._pawn.columnPosition] != ' ')
+                            {
+                                Console.WriteLine("Cannot move here");
+                                return;
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        for (int i = _pawnManager._pawn.rowPosition + 1; i < _pawnManager.rowMove; i++)
+                        {
+                            if (board[i, _pawnManager._pawn.columnPosition] != ' ')
+                            {
+                                Console.WriteLine("Cannot move here");
+                                return;
+                            }
+
+                        }
+                    }
+                   
+                }
+
+
+
+                if (_pawnManager.columnMove != _pawnManager._pawn.columnPosition)
+                {
+                    if (_pawnManager._pawn.columnPosition > _pawnManager.columnMove)
+                    {
+                        for (int i = _pawnManager._pawn.columnPosition - 1; i > _pawnManager.columnMove; i--)
+                        {
+                            if (board[_pawnManager._pawn.rowPosition, i] != ' ')
+                            {
+                                Console.WriteLine("Cannot move here");
+                                return;
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        for (int i = _pawnManager._pawn.columnPosition + 1; i < _pawnManager.columnMove; i++)
+                        {
+                            if (board[_pawnManager._pawn.rowPosition, i] != ' ')
+                            {
+                                Console.WriteLine("Cannot move here");
+                                return;
+                            }
+
+                        }
+                    }
+                      
+                }
+            }
             
 
             if (_pawnManager.MovePawn())

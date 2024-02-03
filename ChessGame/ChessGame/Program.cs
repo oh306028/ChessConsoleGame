@@ -30,11 +30,38 @@ class Program
         while (game)
         {
 
+
             Console.WriteLine("Please choose your figure: ");
             int x = int.Parse(Console.ReadLine());
             int y = int.Parse(Console.ReadLine());
 
-            var pawn = new BlackPawn(x, y);
+            IPawn figure = null;
+            char answer = chessBoard[x, y];
+
+
+
+
+            switch (answer)
+            {
+                case 'P':
+                    figure = new WhitePawn(x, y);
+                    break;
+                case 'R':
+                    figure = new WhiteRock(x, y);
+                    break;
+                case 'p':
+                    figure = new BlackPawn(x, y);
+                    break;
+                case 'r':
+                    figure = new BlackRock(x, y);
+                    break;
+                default:
+                    Console.WriteLine("Bad choice");
+                    break;
+            }
+
+
+
 
             Console.WriteLine("Please choose where your figure should move: ");
             int xMove = int.Parse(Console.ReadLine());
@@ -46,7 +73,7 @@ class Program
                 return;
 
 
-            var pawnManager = new PawnManager(pawn, move);
+            var pawnManager = new PawnManager(figure, move);
             var gridManager = new GridManager(pawnManager);
 
 
