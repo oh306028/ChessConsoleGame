@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace ChessGame
 {
-    public class WhiteRock : IPawn
-    {   
+    internal class WhiteBishop : IPawn
+    {
         public int rowPosition { get ; set ; }
-        public int columnPosition { get ; set ; }
-        public char symbol { get; } = 'R';
+        public int columnPosition { get; set; }
 
-        public WhiteRock(int x, int y)
+        public char symbol { get; } = 'B';
+
+        public WhiteBishop(int x, int y)
         {
             rowPosition = x;
             columnPosition = y;
@@ -32,16 +33,16 @@ namespace ChessGame
 
         public bool CanMove(int x, int y)
         {
-
-            if (rowPosition == x && columnPosition == y)
-                return false;
-
-            if (rowPosition != x && columnPosition == y || rowPosition == x && columnPosition != y)
+            if (Math.Abs(rowPosition - x) == Math.Abs(columnPosition - y))
                 return true;
-
+            
+               
 
             return false;
 
+          
+          
         }
+
     }
 }

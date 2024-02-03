@@ -110,6 +110,39 @@ namespace ChessGame
                 }
             }
             
+            if(_pawnManager._pawn.symbol == 'B' || _pawnManager._pawn.symbol == 'b')
+            {
+                if (_pawnManager._pawn.rowPosition > _pawnManager.rowMove && _pawnManager._pawn.columnPosition < _pawnManager.columnMove)
+                {
+                    for (int i = _pawnManager._pawn.rowPosition; i <= _pawnManager.rowMove; i++)
+                    {
+                        for (int j = _pawnManager._pawn.columnPosition; j >= _pawnManager.columnMove; j--)
+                        {
+                            if (board[i, j] != ' ')
+                            {
+                                Console.WriteLine("Cannot move");
+                                return;
+                            }
+                                
+                        }
+                    }
+                }
+
+                if (_pawnManager._pawn.rowPosition < _pawnManager.rowMove && _pawnManager._pawn.columnPosition > _pawnManager.columnMove)
+                {
+                    for (int i = _pawnManager.rowMove; i >= _pawnManager._pawn.rowPosition; i--)
+                    {
+                        for (int j = _pawnManager.columnMove; j <= _pawnManager._pawn.columnPosition; j++)
+                        {
+                            if (board[i, j] != ' ')
+                            {
+                                Console.WriteLine("Cannot move");
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
 
 
             if (_pawnManager.MovePawn())

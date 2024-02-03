@@ -21,7 +21,7 @@ class Program
     {
 
         bool game = true;
-
+       
         var gridCreator = new GridCreator();
         var chessBoard = gridCreator.InitGrid();
 
@@ -30,7 +30,6 @@ class Program
         while (game)
         {
 
-
             Console.WriteLine("Please choose your figure: ");
             int x = int.Parse(Console.ReadLine());
             int y = int.Parse(Console.ReadLine());
@@ -38,8 +37,7 @@ class Program
             IPawn figure = null;
             char answer = chessBoard[x, y];
 
-
-           
+    
 
             switch (answer)
             {
@@ -58,12 +56,23 @@ class Program
                 case 'N':
                     figure = new WhiteKnight(x, y);
                     break;
+                case 'n':
+                    figure = new BlackKnight(x, y);
+                    break;
+                case 'B':
+                    figure = new WhiteBishop(x, y);
+                    break;
                 default:
                     Console.WriteLine("Bad choice");
                     break;
             }
 
 
+            if(figure is null)
+            {
+                Console.WriteLine("Bad input");
+                return;
+            }
 
 
             Console.WriteLine("Please choose where your figure should move: ");
@@ -82,8 +91,10 @@ class Program
 
             gridManager.ChangeBoardAfterChange(ref chessBoard);
 
+
             Console.WriteLine();
             Console.WriteLine();
+
 
             gridManager.ShowBoard(chessBoard);
 
