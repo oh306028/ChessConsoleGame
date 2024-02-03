@@ -24,7 +24,10 @@ namespace ChessGame
 
         public bool CanAttack(int x, int y)
         {
-            throw new NotImplementedException();
+            if (CanMove(x, y))
+                return true;
+
+            return false;
         }
 
         public bool CanMove(int x, int y)

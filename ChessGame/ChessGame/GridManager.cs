@@ -46,13 +46,14 @@ namespace ChessGame
                 return;
             }
 
+
             if(_pawnManager._pawn.symbol == 'R' || _pawnManager._pawn.symbol == 'r')
             {
                 if (_pawnManager.rowMove != _pawnManager._pawn.rowPosition)
                 {
                     if(_pawnManager._pawn.rowPosition > _pawnManager.rowMove)
                     {
-                        for (int i = _pawnManager._pawn.rowPosition - 1; i > _pawnManager.rowMove; i--)
+                        for (int i = _pawnManager._pawn.rowPosition - 1; i >= _pawnManager.rowMove; i--)
                         {
                             if (board[i, _pawnManager._pawn.columnPosition] != ' ')
                             {
@@ -64,7 +65,7 @@ namespace ChessGame
                     }
                     else
                     {
-                        for (int i = _pawnManager._pawn.rowPosition + 1; i < _pawnManager.rowMove; i++)
+                        for (int i = _pawnManager._pawn.rowPosition + 1; i <= _pawnManager.rowMove; i++)
                         {
                             if (board[i, _pawnManager._pawn.columnPosition] != ' ')
                             {
@@ -83,7 +84,7 @@ namespace ChessGame
                 {
                     if (_pawnManager._pawn.columnPosition > _pawnManager.columnMove)
                     {
-                        for (int i = _pawnManager._pawn.columnPosition - 1; i > _pawnManager.columnMove; i--)
+                        for (int i = _pawnManager._pawn.columnPosition - 1; i >= _pawnManager.columnMove; i--)
                         {
                             if (board[_pawnManager._pawn.rowPosition, i] != ' ')
                             {
@@ -95,7 +96,7 @@ namespace ChessGame
                     }
                     else
                     {
-                        for (int i = _pawnManager._pawn.columnPosition + 1; i < _pawnManager.columnMove; i++)
+                        for (int i = _pawnManager._pawn.columnPosition + 1; i <= _pawnManager.columnMove; i++)
                         {
                             if (board[_pawnManager._pawn.rowPosition, i] != ' ')
                             {
@@ -109,6 +110,7 @@ namespace ChessGame
                 }
             }
             
+
 
             if (_pawnManager.MovePawn())
             {

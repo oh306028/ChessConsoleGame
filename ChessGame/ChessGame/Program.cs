@@ -39,7 +39,7 @@ class Program
             char answer = chessBoard[x, y];
 
 
-
+           
 
             switch (answer)
             {
@@ -54,6 +54,9 @@ class Program
                     break;
                 case 'r':
                     figure = new BlackRock(x, y);
+                    break;
+                case 'N':
+                    figure = new WhiteKnight(x, y);
                     break;
                 default:
                     Console.WriteLine("Bad choice");
