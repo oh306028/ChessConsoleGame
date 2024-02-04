@@ -18,9 +18,26 @@ namespace ChessGame
         public GridManager(PawnManager pawnManager) 
         {
             _pawnManager = pawnManager;
-        
+            
+
+
         }
 
+        private bool CanCastle(char[,] board)
+        {
+
+            if (_pawnManager._pawn.symbol == 'K' || _pawnManager._pawn.symbol == 'R'
+                && board[8, 4] == 'K' && (board[8, 1] == 'R' || board[8, 8] == 'R'))
+                return true;
+
+
+             if (_pawnManager._pawn.symbol == 'k' || _pawnManager._pawn.symbol == 'r'
+                && board[1, 5] == 'k' && (board[1, 1] == 'r' || board[1, 8] == 'r'))
+                return true;
+
+
+             return false;
+        }
         
 
         public void ShowBoard(char[,] board)
@@ -39,38 +56,50 @@ namespace ChessGame
 
         public void ChangeBoardAfterChange(ref char[,] board)
         {
+            var attackService = new PieceAttacksService(_pawnManager._pawn);
+            bool canMove = true;
 
-            if (board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ' && !_pawnManager._pawn.CanAttack(_pawnManager.rowMove, _pawnManager.columnMove))
+           
+            if (board[_pawnManager.rowMove, _pawnManager.columnMove] != ' '
+                && (_pawnManager._pawn.symbol == 'P' || _pawnManager._pawn.symbol == 'p') && !_pawnManager._pawn.CanAttack(_pawnManager.rowMove, _pawnManager.columnMove))
             {
                 Console.WriteLine("Cannot move here");
                 return;
+            }else if(board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ')
+                canMove = false;
+            
+          
+                
+
+            if (_pawnManager._pawn.rowPosition == _pawnManager.rowMove && _pawnManager._pawn.columnPosition == _pawnManager.columnMove)
+            {
+                canMove = false;
             }
 
-            
-            if(_pawnManager._pawn.symbol == 'R' || _pawnManager._pawn.symbol == 'r')
+
+
+            if (_pawnManager._pawn.symbol == 'R' || _pawnManager._pawn.symbol == 'r' || _pawnManager._pawn.symbol == 'Q' || _pawnManager._pawn.symbol == 'q')
             {
                 if (_pawnManager.rowMove != _pawnManager._pawn.rowPosition)
                 {
-                    if(_pawnManager._pawn.rowPosition > _pawnManager.rowMove)
+                    if(_pawnManager._pawn.rowPosition > _pawnManager.rowMove && _pawnManager._pawn.columnPosition == _pawnManager.columnMove)
                     {
                         for (int i = _pawnManager._pawn.rowPosition - 1; i >= _pawnManager.rowMove; i--)
                         {
                             if (board[i, _pawnManager._pawn.columnPosition] != ' ')
                             {
-                                Console.WriteLine("Cannot move here");
-                                return;
+                                canMove = false;
                             }
 
                         }
                     }
-                    else
+                    else if (_pawnManager._pawn.rowPosition < _pawnManager.rowMove && _pawnManager._pawn.columnPosition == _pawnManager.columnMove)
                     {
                         for (int i = _pawnManager._pawn.rowPosition + 1; i <= _pawnManager.rowMove; i++)
                         {
                             if (board[i, _pawnManager._pawn.columnPosition] != ' ')
                             {
-                                Console.WriteLine("Cannot move here");
-                                return;
+                                canMove = false;
                             }
 
                         }
@@ -80,7 +109,7 @@ namespace ChessGame
 
 
 
-                if (_pawnManager.columnMove != _pawnManager._pawn.columnPosition)
+                if (_pawnManager.columnMove != _pawnManager._pawn.columnPosition && _pawnManager._pawn.rowPosition == _pawnManager.rowMove)
                 {
                     if (_pawnManager._pawn.columnPosition > _pawnManager.columnMove)
                     {
@@ -88,8 +117,7 @@ namespace ChessGame
                         {
                             if (board[_pawnManager._pawn.rowPosition, i] != ' ')
                             {
-                                Console.WriteLine("Cannot move here");
-                                return;
+                                canMove = false;
                             }
 
                         }
@@ -100,8 +128,7 @@ namespace ChessGame
                         {
                             if (board[_pawnManager._pawn.rowPosition, i] != ' ')
                             {
-                                Console.WriteLine("Cannot move here");
-                                return;
+                                canMove = false;
                             }
 
                         }
@@ -110,18 +137,15 @@ namespace ChessGame
                 }
             }
             
-            if(_pawnManager._pawn.symbol == 'B' || _pawnManager._pawn.symbol == 'b')
+            if(_pawnManager._pawn.symbol == 'B' || _pawnManager._pawn.symbol == 'b' || _pawnManager._pawn.symbol == 'Q' || _pawnManager._pawn.symbol == 'q')
             {
 
-                if (_pawnManager._pawn.rowPosition == _pawnManager.rowMove && _pawnManager._pawn.columnPosition == _pawnManager.columnMove)
-                {
-                    Console.WriteLine("Cannot move here");
-                    return;
-                }
-                    
+               
 
                 if(_pawnManager._pawn.rowPosition > _pawnManager.rowMove && _pawnManager._pawn.columnPosition < _pawnManager.columnMove)
                 {
+                   
+                        
                     int x = _pawnManager._pawn.rowPosition;
                     int y = _pawnManager._pawn.columnPosition;
                     while (x > _pawnManager.rowMove && y < _pawnManager.columnMove)
@@ -130,8 +154,7 @@ namespace ChessGame
                         y++;
                         if (board[x,y] != ' ')
                         {
-                            Console.WriteLine("Cannot move here");
-                            return;
+                            canMove = false;
                         }
                         
                     }
@@ -148,8 +171,7 @@ namespace ChessGame
                         y--;
                         if (board[x, y] != ' ')
                         {
-                            Console.WriteLine("Cannot move here");
-                            return;
+                            canMove = false;
                         }
                             
                         
@@ -167,9 +189,9 @@ namespace ChessGame
                         y--;
                         if (board[x, y] != ' ')
                         {
-                            Console.WriteLine("Cannot move here");
-                            return;
+                            canMove = false;
                         }
+                        
 
 
                     }
@@ -182,26 +204,33 @@ namespace ChessGame
                     int y = _pawnManager._pawn.columnPosition;
                     while (x < _pawnManager.rowMove && y < _pawnManager.columnMove)
                     {
-                        x--;
-                        y--;
+                        x++;
+                        y++;
                         if (board[x, y] != ' ')
                         {
-                            Console.WriteLine("Cannot move here");
-                            return;
+                            canMove = false;
                         }
 
 
                     }
 
                 }
-
-
-
+ 
             }
 
 
-            if (_pawnManager.MovePawn())
+            if (!canMove)
             {
+                if (attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
+                {
+                    canMove = true;
+                }
+            }
+
+
+            if (_pawnManager.MovePawn() && canMove)
+            {
+
                 board[_pawnManager.rowMove, _pawnManager.columnMove] = _pawnManager._pawn.symbol;
                 board[_pawnManager._pawn.rowPosition, _pawnManager._pawn.columnPosition] = ' ';
             }

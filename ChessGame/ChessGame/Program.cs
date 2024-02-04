@@ -62,6 +62,21 @@ class Program
                 case 'B':
                     figure = new WhiteBishop(x, y);
                     break;
+                case 'b':
+                    figure = new BlackBishop(x, y);
+                    break;
+                case 'Q':
+                    figure = new WhiteQueen(x, y);
+                    break;
+                case 'q':
+                    figure = new BlackQueen(x, y);
+                    break;
+                case 'K':
+                    figure = new WhiteKing(x, y);
+                    break;
+                case 'k':
+                    figure = new BlackKing(x, y);
+                    break;
                 default:
                     Console.WriteLine("Bad choice");
                     break;

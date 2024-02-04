@@ -30,8 +30,8 @@ namespace ChessGame
             board[8, 1] = 'R';
             board[8, 2] = 'N';
             board[8, 3] = 'B';
-            board[8, 4] = 'Q';
-            board[8, 5] = 'K';
+            board[8, 4] = 'K';
+            board[8, 5] = 'Q';
             board[8, 6] = 'B';
             board[8, 7] = 'N';
             board[8, 8] = 'R';
