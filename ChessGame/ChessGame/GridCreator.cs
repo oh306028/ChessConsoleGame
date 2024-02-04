@@ -60,6 +60,8 @@ namespace ChessGame
             board[7, 0] = '7';
             board[8, 0] = '8';
 
+            
+
             for (int i = 3; i < 9 - 2; i++)
             {
                 for (int j = 1; j < 9; j++)

@@ -46,7 +46,7 @@ namespace ChessGame
                 return;
             }
 
-
+            
             if(_pawnManager._pawn.symbol == 'R' || _pawnManager._pawn.symbol == 'r')
             {
                 if (_pawnManager.rowMove != _pawnManager._pawn.rowPosition)
@@ -112,36 +112,91 @@ namespace ChessGame
             
             if(_pawnManager._pawn.symbol == 'B' || _pawnManager._pawn.symbol == 'b')
             {
-                if (_pawnManager._pawn.rowPosition > _pawnManager.rowMove && _pawnManager._pawn.columnPosition < _pawnManager.columnMove)
-                {
-                    for (int i = _pawnManager._pawn.rowPosition; i <= _pawnManager.rowMove; i++)
-                    {
-                        for (int j = _pawnManager._pawn.columnPosition; j >= _pawnManager.columnMove; j--)
-                        {
-                            if (board[i, j] != ' ')
-                            {
-                                Console.WriteLine("Cannot move");
-                                return;
-                            }
-                                
-                        }
-                    }
-                }
 
+                if (_pawnManager._pawn.rowPosition == _pawnManager.rowMove && _pawnManager._pawn.columnPosition == _pawnManager.columnMove)
+                {
+                    Console.WriteLine("Cannot move here");
+                    return;
+                }
+                    
+
+                if(_pawnManager._pawn.rowPosition > _pawnManager.rowMove && _pawnManager._pawn.columnPosition < _pawnManager.columnMove)
+                {
+                    int x = _pawnManager._pawn.rowPosition;
+                    int y = _pawnManager._pawn.columnPosition;
+                    while (x > _pawnManager.rowMove && y < _pawnManager.columnMove)
+                    {
+                        x--;
+                        y++;
+                        if (board[x,y] != ' ')
+                        {
+                            Console.WriteLine("Cannot move here");
+                            return;
+                        }
+                        
+                    }
+            
+                }
+                
                 if (_pawnManager._pawn.rowPosition < _pawnManager.rowMove && _pawnManager._pawn.columnPosition > _pawnManager.columnMove)
                 {
-                    for (int i = _pawnManager.rowMove; i >= _pawnManager._pawn.rowPosition; i--)
+                    int x = _pawnManager._pawn.rowPosition;
+                    int y = _pawnManager._pawn.columnPosition;
+                    while (x < _pawnManager.rowMove && y > _pawnManager.columnMove)
                     {
-                        for (int j = _pawnManager.columnMove; j <= _pawnManager._pawn.columnPosition; j++)
+                        x++;
+                        y--;
+                        if (board[x, y] != ' ')
                         {
-                            if (board[i, j] != ' ')
-                            {
-                                Console.WriteLine("Cannot move");
-                                return;
-                            }
+                            Console.WriteLine("Cannot move here");
+                            return;
                         }
+                            
+                        
                     }
+                
                 }
+
+                if (_pawnManager._pawn.rowPosition > _pawnManager.rowMove && _pawnManager._pawn.columnPosition > _pawnManager.columnMove)
+                {
+                    int x = _pawnManager._pawn.rowPosition;
+                    int y = _pawnManager._pawn.columnPosition;
+                    while (x > _pawnManager.rowMove && y > _pawnManager.columnMove)
+                    {
+                        x--;
+                        y--;
+                        if (board[x, y] != ' ')
+                        {
+                            Console.WriteLine("Cannot move here");
+                            return;
+                        }
+
+
+                    }
+
+                }
+
+                if (_pawnManager._pawn.rowPosition < _pawnManager.rowMove && _pawnManager._pawn.columnPosition < _pawnManager.columnMove)
+                {
+                    int x = _pawnManager._pawn.rowPosition;
+                    int y = _pawnManager._pawn.columnPosition;
+                    while (x < _pawnManager.rowMove && y < _pawnManager.columnMove)
+                    {
+                        x--;
+                        y--;
+                        if (board[x, y] != ' ')
+                        {
+                            Console.WriteLine("Cannot move here");
+                            return;
+                        }
+
+
+                    }
+
+                }
+
+
+
             }
 
 
