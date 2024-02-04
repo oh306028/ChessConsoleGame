@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChessGame
 {
-    internal class WhiteBishop : IPawn
+    public class WhiteBishop : IPawn
     {
         public int rowPosition { get ; set ; }
         public int columnPosition { get; set; }
