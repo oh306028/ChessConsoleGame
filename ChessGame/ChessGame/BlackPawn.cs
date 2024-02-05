@@ -25,7 +25,7 @@ namespace ChessGame
 
         public bool CanMove(int x, int y)
         {
-            if(rowPosition == 2 && (rowPosition + 2) == x)
+            if((rowPosition == 2 && columnPosition == y)  && (rowPosition + 2) == x)
                 return true;
 
             if (rowPosition == x && columnPosition == y)
@@ -51,7 +51,7 @@ namespace ChessGame
         public bool CanAttack(int x, int y)
         {
 
-            if (rowPosition + 1 == x && columnPosition + 1 == y || columnPosition - 1 == y)
+            if (rowPosition + 1 == x && (columnPosition + 1 == y || columnPosition - 1 == y))
                 return true;
 
             return false;

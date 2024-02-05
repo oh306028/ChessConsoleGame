@@ -23,22 +23,60 @@ namespace ChessGame
 
         }
 
-        private bool CanCastle(char[,] board)
+        private bool CanCastle(char[,] board, out char rock)
         {
 
-            if (_pawnManager._pawn.symbol == 'K' || _pawnManager._pawn.symbol == 'R'
-                && board[8, 4] == 'K' && (board[8, 1] == 'R' || board[8, 8] == 'R'))
-                return true;
+            rock = 'R';
+            if (_pawnManager._pawn.symbol == 'K' && board[_pawnManager.rowMove, _pawnManager.columnMove] == 'R')
+            {
+                
+                if(_pawnManager.columnMove > _pawnManager._pawn.columnPosition)
+                {
+                    for (int i = _pawnManager._pawn.columnPosition+1; i < _pawnManager.columnMove; i++)
+                    {
+                        if (board[_pawnManager.rowMove, i] != ' ')
+                            return false;
+                    }
+                }
 
+                if (_pawnManager.columnMove < _pawnManager._pawn.columnPosition)
+                {
+                    for (int i = _pawnManager._pawn.columnPosition-1; i > _pawnManager.columnMove; i--)
+                    {
+                        if (board[_pawnManager.rowMove, i] != ' ')
+                            return false;
+                    }
+                }
 
-             if (_pawnManager._pawn.symbol == 'k' || _pawnManager._pawn.symbol == 'r'
-                && board[1, 5] == 'k' && (board[1, 1] == 'r' || board[1, 8] == 'r'))
-                return true;
+            }
 
+            
+            if (_pawnManager._pawn.symbol == 'k' && board[_pawnManager.rowMove, _pawnManager.columnMove] == 'r')
+            {
+                rock = 'r';
+                if (_pawnManager.columnMove > _pawnManager._pawn.columnPosition)
+                {
+                    for (int i = _pawnManager._pawn.columnPosition+1; i < _pawnManager.columnMove; i++)
+                    {
+                        if (board[_pawnManager.rowMove, i] != ' ')
+                            return false;
+                    }
+                }
 
-             return false;
+                if (_pawnManager.columnMove < _pawnManager._pawn.columnPosition)
+                {
+                    for (int i = _pawnManager._pawn.columnPosition-1; i > _pawnManager.columnMove; i--)
+                    {
+                        if (board[_pawnManager.rowMove, i] != ' ')
+                            return false;
+                    }
+                }
+
+            }
+
+            return true;
         }
-        
+
 
         public void ShowBoard(char[,] board)
         {
@@ -198,6 +236,8 @@ namespace ChessGame
 
                 }
 
+
+
                 if (_pawnManager._pawn.rowPosition < _pawnManager.rowMove && _pawnManager._pawn.columnPosition < _pawnManager.columnMove)
                 {
                     int x = _pawnManager._pawn.rowPosition;
@@ -226,6 +266,60 @@ namespace ChessGame
                     canMove = true;
                 }
             }
+
+            char rock = '0';
+            if (_pawnManager._pawn.symbol == 'k' || _pawnManager._pawn.symbol == 'K')
+            {
+                if (CanCastle(board, out rock))
+                {
+                    if (_pawnManager.columnMove > _pawnManager._pawn.columnPosition)
+                    {
+                        if (rock == 'R')
+                        {
+                            board[_pawnManager._pawn.rowPosition, _pawnManager._pawn.columnPosition] = ' ';
+                            board[_pawnManager.rowMove, _pawnManager.columnMove] = ' ';
+                            board[_pawnManager.rowMove, _pawnManager.columnMove - 1] = 'K';
+                            board[_pawnManager.rowMove, _pawnManager.columnMove - 2] = 'R';
+                            
+                            return;
+                        }
+
+                        if (rock == 'r')
+                        {
+                            board[_pawnManager._pawn.rowPosition, _pawnManager._pawn.columnPosition] = ' ';
+                            board[_pawnManager.rowMove, _pawnManager.columnMove] = ' ';
+                            board[_pawnManager.rowMove, _pawnManager.columnMove - 1] = 'k';
+                            board[_pawnManager.rowMove, _pawnManager.columnMove - 2] = 'r';
+                            return;
+                        }
+                    }
+
+                    if (_pawnManager.columnMove < _pawnManager._pawn.columnPosition)
+                    {
+                        if (rock == 'R')
+                        {
+                            board[_pawnManager._pawn.rowPosition, _pawnManager._pawn.columnPosition] = ' ';
+                            board[_pawnManager.rowMove, _pawnManager.columnMove] = ' ';
+                            board[_pawnManager.rowMove, _pawnManager.columnMove + 1] = 'K';
+                            board[_pawnManager.rowMove, _pawnManager.columnMove + 2] = 'R';
+                            return;
+                        }
+
+                        if (rock == 'r')
+                        {
+                            board[_pawnManager._pawn.rowPosition, _pawnManager._pawn.columnPosition] = ' ';
+                            board[_pawnManager.rowMove, _pawnManager.columnMove] = ' ';
+                            board[_pawnManager.rowMove, _pawnManager.columnMove + 1] = 'k';
+                            board[_pawnManager.rowMove, _pawnManager.columnMove + 2] = 'r';
+                            return;
+                        }
+                    }
+
+
+
+                }
+            }
+          
 
 
             if (_pawnManager.MovePawn() && canMove)
