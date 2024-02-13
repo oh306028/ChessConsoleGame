@@ -3,8 +3,7 @@ using System;
 using System.Threading.Channels;
 
 class Program
-{
-
+{ 
     public static void show(char[,] board)
     {
         for (int i = 0; i < 9; i++)
@@ -24,8 +23,10 @@ class Program
        
         var gridCreator = new GridCreator();
         var chessBoard = gridCreator.InitGrid();
+        var checkService = new CheckService();
 
         show(chessBoard);
+
 
         while (game)
         {
@@ -36,8 +37,7 @@ class Program
 
             IPawn figure = null;
             char answer = chessBoard[x, y];
-
-    
+         
 
             switch (answer)
             {
@@ -100,8 +100,15 @@ class Program
                 return;
 
 
+
             var pawnManager = new PawnManager(figure, move);
             var gridManager = new GridManager(pawnManager);
+
+            if (checkService.CheckingChecks(chessBoard))
+            {
+                Console.WriteLine("CHECK!");
+                continue;
+            }
 
 
             gridManager.ChangeBoardAfterChange(ref chessBoard);
@@ -117,15 +124,6 @@ class Program
         }
 
     
-
-
-
-      
-
-
-
-
-
 
 
     }

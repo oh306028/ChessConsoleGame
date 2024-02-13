@@ -23,6 +23,8 @@ namespace ChessGame
 
         public bool IsAttacking(char[,] board, int xMove, int yMove)    
         {
+           
+
             if (BlackPieces.Contains(_pawn.symbol))
             {
                   foreach (var piece in WhitePieces)
