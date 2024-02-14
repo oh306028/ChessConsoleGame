@@ -10,8 +10,8 @@ namespace ChessGame
     {
         
         private IPawn _pawn;
-        private List<char>BlackPieces = new List<char>(){'p','r','n','q','k','b'};
-        private List<char> WhitePieces = new List<char>() { 'P', 'R', 'N', 'Q', 'K', 'B' };
+        private List<char>BlackPieces = new List<char>(){'p','r','n','q','b'};
+        private List<char> WhitePieces = new List<char>() { 'P', 'R', 'N', 'Q', 'B' };
 
 
         public PieceAttacksService(IPawn pawn)

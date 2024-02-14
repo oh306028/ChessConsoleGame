@@ -97,26 +97,20 @@ namespace ChessGame
             bool canMove = true;
 
 
-    
-
 
             if (board[_pawnManager.rowMove, _pawnManager.columnMove] != ' '
                 && (_pawnManager._pawn.symbol == 'P' || _pawnManager._pawn.symbol == 'p') && !_pawnManager._pawn.CanAttack(_pawnManager.rowMove, _pawnManager.columnMove))
             {
-                
                 return false;
             }
-            else if (board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ')
-                canMove = false;
-
 
 
 
             if (_pawnManager._pawn.rowPosition == _pawnManager.rowMove && _pawnManager._pawn.columnPosition == _pawnManager.columnMove)
             {
-                canMove = false;
-            }
+                return false;
 
+            }
 
 
             if (_pawnManager._pawn.symbol == 'R' || _pawnManager._pawn.symbol == 'r' || _pawnManager._pawn.symbol == 'Q' || _pawnManager._pawn.symbol == 'q')
@@ -127,7 +121,20 @@ namespace ChessGame
                     {
                         for (int i = _pawnManager._pawn.rowPosition - 1; i >= _pawnManager.rowMove; i--)
                         {
-                            if (board[i, _pawnManager._pawn.columnPosition] != ' ')
+                            if (board[i, _pawnManager._pawn.columnPosition] != ' ' && i != _pawnManager.rowMove)
+                            {
+
+                                canMove = false;
+                                break;
+
+                            }
+
+                            if (i == _pawnManager.rowMove && attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
+                            {
+                                canMove = true;
+                            }
+
+                            if (board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ' && !attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
                             {
                                 canMove = false;
                             }
@@ -138,10 +145,25 @@ namespace ChessGame
                     {
                         for (int i = _pawnManager._pawn.rowPosition + 1; i <= _pawnManager.rowMove; i++)
                         {
-                            if (board[i, _pawnManager._pawn.columnPosition] != ' ')
+                            if (board[i, _pawnManager._pawn.columnPosition] != ' ' && i != _pawnManager.rowMove)
+                            {
+
+                                canMove = false;
+                                break;
+
+                            }
+
+                            if (i == _pawnManager.rowMove && attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
+                            {
+                                canMove = true;
+                            }
+
+                            if (board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ' && !attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
                             {
                                 canMove = false;
                             }
+
+
 
                         }
                     }
@@ -156,10 +178,24 @@ namespace ChessGame
                     {
                         for (int i = _pawnManager._pawn.columnPosition - 1; i >= _pawnManager.columnMove; i--)
                         {
-                            if (board[_pawnManager._pawn.rowPosition, i] != ' ')
+                            if (board[_pawnManager._pawn.rowPosition, i] != ' ' && i != _pawnManager.rowMove)
+                            {
+
+                                canMove = false;
+                                break;
+
+                            }
+
+                            if (i == _pawnManager.rowMove && attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
+                            {
+                                canMove = true;
+                            }
+
+                            if (board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ' && !attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
                             {
                                 canMove = false;
                             }
+
 
                         }
                     }
@@ -167,16 +203,31 @@ namespace ChessGame
                     {
                         for (int i = _pawnManager._pawn.columnPosition + 1; i <= _pawnManager.columnMove; i++)
                         {
-                            if (board[_pawnManager._pawn.rowPosition, i] != ' ')
+                            if (board[_pawnManager._pawn.rowPosition, i] != ' ' && i != _pawnManager.rowMove)
+                            {
+
+                                canMove = false;
+                                break;
+
+                            }
+
+                            if (i == _pawnManager.rowMove && attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
+                            {
+                                canMove = true;
+                            }
+
+                            if (board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ' && !attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
                             {
                                 canMove = false;
                             }
+
 
                         }
                     }
 
                 }
             }
+
 
             if (_pawnManager._pawn.symbol == 'B' || _pawnManager._pawn.symbol == 'b' || _pawnManager._pawn.symbol == 'Q' || _pawnManager._pawn.symbol == 'q')
             {
@@ -197,6 +248,10 @@ namespace ChessGame
                         {
                             canMove = false;
                         }
+                        if (attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove) && board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ')
+                        {
+                            canMove = true;
+                        }
 
                     }
 
@@ -213,6 +268,10 @@ namespace ChessGame
                         if (board[x, y] != ' ')
                         {
                             canMove = false;
+                        }
+                        if (attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove) && board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ')
+                        {
+                            canMove = true;
                         }
 
 
@@ -231,6 +290,10 @@ namespace ChessGame
                         if (board[x, y] != ' ')
                         {
                             canMove = false;
+                        }
+                        if (attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove) && board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ')
+                        {
+                            canMove = true;
                         }
 
 
@@ -253,6 +316,10 @@ namespace ChessGame
                         {
                             canMove = false;
                         }
+                        if (attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove) && board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ')
+                        {
+                            canMove = true;
+                        }
 
 
                     }
@@ -262,7 +329,27 @@ namespace ChessGame
             }
 
 
-          
+            if (_pawnManager._pawn.symbol == 'N' || _pawnManager._pawn.symbol == 'n')
+            {
+                if (_pawnManager.MovePawn())
+                {
+                    if (!attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove) && board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ')
+                        canMove = false;
+                }
+
+
+
+            }
+
+            if (_pawnManager._pawn.symbol == 'K' || _pawnManager._pawn.symbol == 'k')
+            {
+                if (!attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove) && board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ')
+                    canMove = false;
+
+            }
+
+
+
 
             char rock = '0';
             if (_pawnManager._pawn.symbol == 'k' || _pawnManager._pawn.symbol == 'K')
@@ -278,7 +365,7 @@ namespace ChessGame
                             board[_pawnManager.rowMove, _pawnManager.columnMove - 1] = 'K';
                             board[_pawnManager.rowMove, _pawnManager.columnMove - 2] = 'R';
 
-                            return false;
+                            return true;
                         }
 
                         if (rock == 'r')
@@ -287,7 +374,7 @@ namespace ChessGame
                             board[_pawnManager.rowMove, _pawnManager.columnMove] = ' ';
                             board[_pawnManager.rowMove, _pawnManager.columnMove - 1] = 'k';
                             board[_pawnManager.rowMove, _pawnManager.columnMove - 2] = 'r';
-                            return false;
+                            return true;
                         }
                     }
 
@@ -299,7 +386,7 @@ namespace ChessGame
                             board[_pawnManager.rowMove, _pawnManager.columnMove] = ' ';
                             board[_pawnManager.rowMove, _pawnManager.columnMove + 1] = 'K';
                             board[_pawnManager.rowMove, _pawnManager.columnMove + 2] = 'R';
-                           return false;
+                            return true;
                         }
 
                         if (rock == 'r')
@@ -308,7 +395,7 @@ namespace ChessGame
                             board[_pawnManager.rowMove, _pawnManager.columnMove] = ' ';
                             board[_pawnManager.rowMove, _pawnManager.columnMove + 1] = 'k';
                             board[_pawnManager.rowMove, _pawnManager.columnMove + 2] = 'r';
-                            return false;
+                            return true;
                         }
                     }
 
@@ -318,13 +405,6 @@ namespace ChessGame
             }
 
 
-            if (attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
-            {
-                canMove = true;
-            }
-
-
-
             if (_pawnManager.MovePawn() && canMove)
             {
 
@@ -332,7 +412,6 @@ namespace ChessGame
             }
             else
             {
-               
                 return false;
             }
         }
@@ -343,9 +422,6 @@ namespace ChessGame
             bool canMove = true;
 
          
-               
-            
-
 
             if (board[_pawnManager.rowMove, _pawnManager.columnMove] != ' '
                 && (_pawnManager._pawn.symbol == 'P' || _pawnManager._pawn.symbol == 'p') && !_pawnManager._pawn.CanAttack(_pawnManager.rowMove, _pawnManager.columnMove))
@@ -354,16 +430,14 @@ namespace ChessGame
                 return;
             }
 
-
-          
                 
 
             if (_pawnManager._pawn.rowPosition == _pawnManager.rowMove && _pawnManager._pawn.columnPosition == _pawnManager.columnMove)
             {
-                canMove = false;
+                Console.WriteLine("Cannot move here");
+                return;
+
             }
-
-
 
 
             if (_pawnManager._pawn.symbol == 'R' || _pawnManager._pawn.symbol == 'r' || _pawnManager._pawn.symbol == 'Q' || _pawnManager._pawn.symbol == 'q')
@@ -485,27 +559,31 @@ namespace ChessGame
             if (_pawnManager._pawn.symbol == 'B' || _pawnManager._pawn.symbol == 'b' || _pawnManager._pawn.symbol == 'Q' || _pawnManager._pawn.symbol == 'q')
             {
 
-               
 
-                if(_pawnManager._pawn.rowPosition > _pawnManager.rowMove && _pawnManager._pawn.columnPosition < _pawnManager.columnMove)
+
+                if (_pawnManager._pawn.rowPosition > _pawnManager.rowMove && _pawnManager._pawn.columnPosition < _pawnManager.columnMove)
                 {
-                   
-                        
+
+
                     int x = _pawnManager._pawn.rowPosition;
                     int y = _pawnManager._pawn.columnPosition;
                     while (x > _pawnManager.rowMove && y < _pawnManager.columnMove)
                     {
                         x--;
                         y++;
-                        if (board[x,y] != ' ')
+                        if (board[x, y] != ' ')
                         {
                             canMove = false;
                         }
-                        
+                        if (attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove) && board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ')
+                        {
+                            canMove = true;
+                        }
+
                     }
-            
+
                 }
-                
+
                 if (_pawnManager._pawn.rowPosition < _pawnManager.rowMove && _pawnManager._pawn.columnPosition > _pawnManager.columnMove)
                 {
                     int x = _pawnManager._pawn.rowPosition;
@@ -518,10 +596,14 @@ namespace ChessGame
                         {
                             canMove = false;
                         }
-                            
-                        
+                        if (attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove) && board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ')
+                        {
+                            canMove = true;
+                        }
+
+
                     }
-                
+
                 }
 
                 if (_pawnManager._pawn.rowPosition > _pawnManager.rowMove && _pawnManager._pawn.columnPosition > _pawnManager.columnMove)
@@ -536,7 +618,11 @@ namespace ChessGame
                         {
                             canMove = false;
                         }
-                        
+                        if (attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove) && board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ')
+                        {
+                            canMove = true;
+                        }
+
 
 
                     }
@@ -557,16 +643,40 @@ namespace ChessGame
                         {
                             canMove = false;
                         }
+                        if (attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove) && board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ')
+                        {
+                            canMove = true;
+                        }
 
 
                     }
 
                 }
- 
+
             }
 
 
-        
+            if (_pawnManager._pawn.symbol == 'N' || _pawnManager._pawn.symbol == 'n')
+            {
+                if (_pawnManager.MovePawn())
+                {
+                    if (!attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove) && board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ')
+                        canMove = false;
+                }
+
+
+
+            }
+
+            if (_pawnManager._pawn.symbol == 'K' || _pawnManager._pawn.symbol == 'k')
+            {
+                if (!attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove) && board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ')
+                    canMove = false;
+
+            }
+
+
+
 
             char rock = '0';
             if (_pawnManager._pawn.symbol == 'k' || _pawnManager._pawn.symbol == 'K')
@@ -620,7 +730,6 @@ namespace ChessGame
 
                 }
             }
-          
 
 
             if (_pawnManager.MovePawn() && canMove)
