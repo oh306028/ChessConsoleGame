@@ -25,9 +25,8 @@ class Program
         var chessBoard = gridCreator.InitGrid();
         var checkService = new CheckService();
 
-        chessBoard[5, 7] = 'q';
 
-
+  
         show(chessBoard);
 
 
@@ -117,6 +116,13 @@ class Program
             
 
             gridManager.ChangeBoardAfterChange(ref chessBoard);
+
+            if (checkService.CheckingChecks(chessBoard))
+            {
+                Console.WriteLine("CHECK!");
+                continue;
+            }
+
 
 
             Console.WriteLine();
