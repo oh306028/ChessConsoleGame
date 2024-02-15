@@ -74,7 +74,11 @@ namespace ChessGame
                         var pawn = new BlackQueen(i, j);              
 
                         if (CanCheck(board, _move, pawn))
+                        { 
+                            board[kingXPosition, kingYPosition] = 'K';
                             return true;
+                        }
+                            
                     }
 
 

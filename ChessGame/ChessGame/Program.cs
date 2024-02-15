@@ -26,7 +26,7 @@ class Program
         var checkService = new CheckService();
 
 
-  
+        chessBoard[6, 6] = 'q';
         show(chessBoard);
 
 
@@ -39,7 +39,7 @@ class Program
 
             IPawn figure = null;
             char answer = chessBoard[x, y];
-         
+            
 
             switch (answer)
             {
@@ -102,24 +102,33 @@ class Program
                 return;
 
 
-
             var pawnManager = new PawnManager(figure, move);
             var gridManager = new GridManager(pawnManager);
 
-            
-            
-            if (checkService.CheckingChecks(chessBoard))
+
+
+            char[,] chessBoardCopy = (char[,])chessBoard.Clone();
+
+            if (!checkService.CheckingChecks(chessBoard))
             {
-                Console.WriteLine("CHECK!");
+                gridManager.ChangeBoardAfterChange(ref chessBoardCopy);
+
+            }
+            else
+            {
+                Console.WriteLine("Cannot move here");
                 continue;
             }
-            
 
-            gridManager.ChangeBoardAfterChange(ref chessBoard);
+            var result = checkService.CheckingChecks(chessBoardCopy);
 
-            if (checkService.CheckingChecks(chessBoard))
+            if (!result)
             {
-                Console.WriteLine("CHECK!");
+                gridManager.ChangeBoardAfterChange(ref chessBoard);
+            }
+            else
+            {
+                Console.WriteLine("Cannot move here");
                 continue;
             }
 

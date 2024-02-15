@@ -9,8 +9,50 @@ namespace ChessGame.Test
     public class CheckServiceTests
     {
 
+
+
         [Fact]
 
+
+        public void CheckService_CheckAfterSomePieceMove_FromAnotherPiece_ReturnsTrue2()    
+        {
+
+            var grid = new GridCreator();
+            var board = grid.InitGrid();
+            var checkService = new CheckService();
+            var move = new MoveManager(6, 5);
+            var pawnTomove = new WhitePawn(7, 5);
+            var pawnManager = new PawnManager(pawnTomove, move);
+            var gridManager = new GridManager(pawnManager);
+
+
+
+            board[6, 6] = 'q';
+
+            var boardCopy = board;
+
+
+            if (!checkService.CheckingChecks(board))
+            {
+                gridManager.ChangeBoardAfterChange(ref boardCopy);
+            }
+
+            var result = checkService.CheckingChecks(boardCopy);
+
+            if (result)
+            {
+                gridManager.ChangeBoardAfterChange(ref board);
+            }
+
+
+
+            Assert.True(result);
+        }
+
+
+
+
+        [Fact]
 
         public void CheckService_CheckAfterSomePieceMove_FromAnotherPiece_ReturnsTrue() 
         {
