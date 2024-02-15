@@ -83,5 +83,33 @@ namespace ChessGame.Test
 
             Assert.True(result);
         }
+
+
+
+        [Theory]
+        [InlineData(6, 4)]
+        [InlineData(4, 4)]
+        [InlineData(6, 6)]
+        [InlineData(5, 7)]
+
+
+        public void CheckService_ForQueenNotValidChecks_ReturnsFalse(int x, int y)  
+        {
+
+            var grid = new GridCreator();
+            var board = grid.InitGrid();
+            var checkService = new CheckService();
+
+         
+            board[x, y] = 'q';
+
+
+            var result = checkService.CheckingChecks(board);
+
+
+
+
+            Assert.False(result);
+        }
     }
 }

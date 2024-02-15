@@ -38,7 +38,7 @@ namespace ChessGame
                     {
                         kingXPosition = i; kingYPosition = j;
                         _move = new MoveManager(kingXPosition, kingYPosition);
-                        board[kingXPosition, kingYPosition] = ' ';
+                        board[kingXPosition, kingYPosition] = 'P';
                         break;
                     }
                 }
@@ -70,7 +70,8 @@ namespace ChessGame
 
                     if (board[i, j] == 'q')
                     {
-                        var pawn = new BlackQueen(i, j);
+                        board[kingXPosition, kingYPosition] = ' ';
+                        var pawn = new BlackQueen(i, j);              
 
                         if (CanCheck(board, _move, pawn))
                             return true;
@@ -90,7 +91,6 @@ namespace ChessGame
                     {
                         var pawn = new BlackPawn(i, j);
 
-                        board[kingXPosition, kingYPosition] = 'P';
                         if (CanCheck(board, _move, pawn))
                             return true;
                     }
