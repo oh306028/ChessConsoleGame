@@ -26,7 +26,7 @@ class Program
         var checkService = new CheckService();
 
 
-        chessBoard[6, 6] = 'q';
+        chessBoard[3, 7] = 'Q';
         show(chessBoard);
 
 

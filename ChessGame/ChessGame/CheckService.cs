@@ -30,6 +30,8 @@ namespace ChessGame
         {
             MoveManager _move = new MoveManager(0,0);
 
+            //FOR BLACK PIECES
+
             for (int i = 1; i < 9; i++)
             {
                 for (int j = 1; j < 9; j++)
@@ -102,7 +104,88 @@ namespace ChessGame
                 }
 
             }
+
             board[kingXPosition, kingYPosition] = 'K';
+
+
+            //FOR WHITE PIECES
+
+
+            for (int i = 1; i < 9; i++)
+            {
+                for (int j = 1; j < 9; j++)
+                {
+                    if (board[i, j] == 'k')
+                    {
+                        kingXPosition = i; kingYPosition = j;
+                        _move = new MoveManager(kingXPosition, kingYPosition);
+                        board[kingXPosition, kingYPosition] = 'p';
+                        break;
+                    }
+                }
+            }
+
+            for (int i = 1; i < 9; i++)
+            {
+                for (int j = 1; j < 9; j++)
+                {
+
+                    if (board[i, j] == 'R')
+                    {
+                        var pawn = new WhiteRock(i, j);
+
+                        if (CanCheck(board, _move, pawn))
+                            return true;
+
+                    }
+
+                    if (board[i, j] == 'B')
+                    {
+                        var pawn = new WhiteBishop(i, j);
+
+                        if (CanCheck(board, _move, pawn))
+                            return true;
+                    }
+
+
+                    if (board[i, j] == 'Q')
+                    {
+                        board[kingXPosition, kingYPosition] = ' ';
+                        var pawn = new WhiteQueen(i, j);
+
+                        if (CanCheck(board, _move, pawn))
+                        {
+                            board[kingXPosition, kingYPosition] = 'K';
+                            return true;
+                        }
+
+                    }
+
+
+                    if (board[i, j] == 'N')
+                    {
+                        var pawn = new WhiteKnight(i, j);
+
+                        if (CanCheck(board, _move, pawn))
+                            return true;
+                    }
+
+
+                    if (board[i, j] == 'P')
+                    {
+                        var pawn = new WhitePawn(i, j);
+
+                        if (CanCheck(board, _move, pawn))
+                            return true;
+                    }
+
+                }
+
+            }
+
+
+
+            board[kingXPosition, kingYPosition] = 'k';
             return false;
             
         }

@@ -83,6 +83,37 @@ namespace ChessGame.Test
             Assert.True(result);
         }
 
+        [Fact]
+
+        public void CheckService_WHITEPIECESCheckAfterSomePieceMove_FromAnotherPiece_ReturnsTrue()  
+        {
+
+            var grid = new GridCreator();
+            var board = grid.InitGrid();
+            var checkService = new CheckService();
+            var move = new MoveManager(3, 6);
+            var pawnTomove = new BlackPawn(2, 6);
+            var pawnManager = new PawnManager(pawnTomove, move);
+            var gridManager = new GridManager(pawnManager);
+
+
+
+            board[3, 7] = 'Q';
+
+
+
+            if (!checkService.CheckingChecks(board))
+            {
+                gridManager.ChangeBoardAfterChange(ref board);
+            }
+
+            var result = checkService.CheckingChecks(board);
+
+
+
+            Assert.True(result);
+        }
+
         [Theory]
         [InlineData(6, 5)]
         [InlineData(6, 3)]
@@ -186,5 +217,34 @@ namespace ChessGame.Test
 
             Assert.False(result);
         }
+
+
+
+        [Theory]
+        [InlineData(5, 1)]
+        [InlineData(3, 3)]
+        [InlineData(3, 5)]
+        [InlineData(3, 7)]
+
+
+        public void CheckService_ForWHITEPIECESQueenNotValidChecks_ReturnsFalse(int x, int y)   
+        {
+
+            var grid = new GridCreator();
+            var board = grid.InitGrid();
+            var checkService = new CheckService();
+
+
+            board[x, y] = 'Q';
+
+
+            var result = checkService.CheckingChecks(board);
+
+
+
+
+            Assert.False(result);
+        }
+
     }
 }
