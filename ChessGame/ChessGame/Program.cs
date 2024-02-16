@@ -24,9 +24,11 @@ class Program
         var gridCreator = new GridCreator();
         var chessBoard = gridCreator.InitGrid();
         var checkService = new CheckService();
+        var playerTurn = new PlayerTurnService();
+
+        bool WhitePlayerTurn = true;
 
 
-        chessBoard[6, 6] = 'q';
         show(chessBoard);
 
 
@@ -40,6 +42,7 @@ class Program
             IPawn figure = null;
             char answer = chessBoard[x, y];
             
+
 
             switch (answer)
             {
@@ -85,6 +88,35 @@ class Program
             }
 
 
+            if (WhitePlayerTurn)
+            {
+                if (playerTurn.WhitePlayerCanMove(figure))
+                {
+
+                }
+                else
+                {
+                    Console.WriteLine("White player turn");
+                    continue;
+                }
+
+            }
+            else
+            {
+                if (!playerTurn.WhitePlayerCanMove(figure))
+                {
+
+                }
+                else
+                {
+                    Console.WriteLine("Black player turn");
+                    continue;
+                }
+            }
+           
+           
+
+
             if(figure is null)
             {
                 Console.WriteLine("Bad input");
@@ -125,6 +157,17 @@ class Program
             if (!result)
             {
                 gridManager.ChangeBoardAfterChange(ref chessBoard);
+
+                if (WhitePlayerTurn)
+                {
+                    WhitePlayerTurn = false;
+                }
+                else
+                {
+                    WhitePlayerTurn = true;
+                }
+                    
+
             }
             else
             {
