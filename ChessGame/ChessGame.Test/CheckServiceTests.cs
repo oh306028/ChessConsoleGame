@@ -14,6 +14,46 @@ namespace ChessGame.Test
         [Fact]
 
 
+        public void CheckService_WHITECheckAfterSomePieceMove_FromAnotherPiece_ReturnsFalse()   
+        {
+
+            var grid = new GridCreator();
+            var board = grid.InitGrid();
+            var checkService = new CheckService();
+            var move = new MoveManager(6, 6);
+            var pawnTomove = new WhitePawn(7, 7);
+            var pawnManager = new PawnManager(pawnTomove, move);
+            var gridManager = new GridManager(pawnManager);
+
+
+
+            board[6, 6] = 'q';
+            board[7, 5] = ' ';
+
+
+            var boardCopy = (char[,])board.Clone();
+            gridManager.ChangeBoardAfterChange(ref boardCopy);
+            if (!checkService.CheckingChecks(boardCopy))
+            {
+                gridManager.ChangeBoardAfterChange(ref board);
+            }
+
+            var result = checkService.CheckingChecks(board);
+
+
+
+
+
+            Assert.False(result);
+        }
+
+
+
+
+
+        [Fact]
+
+
         public void CheckService_CheckAfterSomePieceMove_FromAnotherPiece_ReturnsTrue2()    
         {
 
@@ -29,7 +69,7 @@ namespace ChessGame.Test
 
             board[6, 6] = 'q';
 
-            var boardCopy = board;
+            var boardCopy = (char[,])board.Clone();
 
 
             if (!checkService.CheckingChecks(board))

@@ -139,41 +139,30 @@ class Program
 
 
 
+
+
             char[,] chessBoardCopy = (char[,])chessBoard.Clone();
+            gridManager.ChangeBoardAfterChange(ref chessBoardCopy);
 
-            if (!checkService.CheckingChecks(chessBoard))
-            {
-                gridManager.ChangeBoardAfterChange(ref chessBoardCopy);
-
-            }
-            else
-            {
-                Console.WriteLine("Cannot move here");
-                continue;
-            }
-
-            var result = checkService.CheckingChecks(chessBoardCopy);
-
-            if (!result)
-            {
-                gridManager.ChangeBoardAfterChange(ref chessBoard);
-
-                if (WhitePlayerTurn)
+             if (!checkService.CheckingChecks(chessBoardCopy))
                 {
-                    WhitePlayerTurn = false;
+                    gridManager.ChangeBoardAfterChange(ref chessBoard);
+                    if (WhitePlayerTurn)
+                    {
+                        WhitePlayerTurn = false;
+                    }
+                    else
+                    {
+                        WhitePlayerTurn = true;
+                    }
                 }
-                else
-                {
-                    WhitePlayerTurn = true;
-                }
-                    
+             else
+               {
+                   Console.WriteLine("Cannot move here");
+                   continue;
+               }
 
-            }
-            else
-            {
-                Console.WriteLine("Cannot move here");
-                continue;
-            }
+
 
 
 
