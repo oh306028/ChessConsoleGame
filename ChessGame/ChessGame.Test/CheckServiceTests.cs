@@ -10,6 +10,44 @@ namespace ChessGame.Test
     {
 
 
+        [Fact]
+
+
+        public void CheckService_WHITECheckAfterSomePieceMove_FromAnotherPiece_ReturnsTrue()    
+        {
+
+            var grid = new GridCreator();
+            var board = grid.InitGrid();
+            var checkService = new CheckService();
+            var move = new MoveManager(6, 1);
+            var pawnTomove = new WhitePawn(7, 1);
+            var pawnManager = new PawnManager(pawnTomove, move);
+            var gridManager = new GridManager(pawnManager);
+
+
+
+            board[6, 6] = 'q';
+            board[7, 5] = ' ';
+
+
+            var boardCopy = (char[,])board.Clone();
+            gridManager.ChangeBoardAfterChange(ref boardCopy);
+            if (!checkService.CheckingChecks(boardCopy))
+            {
+                gridManager.ChangeBoardAfterChange(ref board);
+            }
+
+            var result = checkService.CheckingChecks(board);
+
+
+
+
+
+            Assert.True(result);
+        }
+
+
+
 
         [Fact]
 
