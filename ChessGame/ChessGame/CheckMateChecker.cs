@@ -17,7 +17,10 @@ namespace ChessGame
 
             var symbol = board[xPosChecker, yPosCheker];
 
+            if(symbol == 'P')
+            {
 
+            }
 
             if (symbol == 'q' || symbol == 'r')
             {
@@ -129,7 +132,7 @@ namespace ChessGame
         }
 
             public static bool IsCheckMate(char[,] board, int xPosChecker, int yPosCheker)  
-        {
+            {
 
             for (int i = 1; i < 9; i++)
             {
@@ -160,7 +163,7 @@ namespace ChessGame
                     }
 
 
-
+                    
                     if (board[i, j] == 'B')
                     {
                         var pawn = new WhiteBishop(i, j);
@@ -199,12 +202,10 @@ namespace ChessGame
                         if (CanMoveTioDiscardCheck(board, pawn, xPosChecker, yPosCheker))
                             return false;
                     }
-
+                    
                 }
 
             }
-
-
 
 
 

@@ -29,8 +29,8 @@ class Program
         bool WhitePlayerTurn = true;
 
 
-     //   chessBoard[6, 1] = 'R';
-        chessBoard[6, 5] = 'q';
+
+        chessBoard[5, 5] = 'q';
         show(chessBoard);
 
 
@@ -160,13 +160,13 @@ class Program
                 }
                 else
                 {
-                    /*
+                    
                    if (CheckMateChecker.IsCheckMate(chessBoardCopy, xPos, yPos))
                    {
                        Console.WriteLine("CHECKMATE");
                        return;
                    }
-                   */
+                   
                     Console.WriteLine("Cannot move here");
                     continue;
                 }
@@ -183,13 +183,13 @@ class Program
                 else
                 {
 
-                    /*
+                    
                     if (CheckMateChecker.IsCheckMate(chessBoardCopy, xPos, yPos))
                     {
                         Console.WriteLine("CHECKMATE");
                         return;
                     }
-                    */
+                    
 
                     Console.WriteLine("Cannot move here");
                     continue;
