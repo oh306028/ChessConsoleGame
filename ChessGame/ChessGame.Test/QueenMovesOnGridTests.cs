@@ -497,11 +497,12 @@ namespace ChessGame.Test
         public void QueenMoves_ForValidMoves_ReturnsTrue(int z, int v)  
         {
             bool canMove = true;
+            var grid = new GridCreator();
+            var board = grid.InitGrid();
             var pawn = new WhiteQueen(8, 5);
             var move = new MoveManager(z, v);
             var _pawnManager = new PawnManager(pawn, move);
-            var grid = new GridCreator();
-            var board = grid.InitGrid();
+
             var attackService = new PieceAttacksService(pawn);
 
             board[7, 5] = ' ';

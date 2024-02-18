@@ -29,6 +29,8 @@ class Program
         bool WhitePlayerTurn = true;
 
 
+     //   chessBoard[6, 1] = 'R';
+        chessBoard[6, 5] = 'q';
         show(chessBoard);
 
 
@@ -144,7 +146,9 @@ class Program
             char[,] chessBoardCopy = (char[,])chessBoard.Clone();
             gridManager.ChangeBoardAfterChange(ref chessBoardCopy);
 
-             if (!checkService.CheckingChecks(chessBoardCopy))
+            int xPos = 0;
+            int yPos = 0;
+             if (!checkService.CheckingChecks(chessBoardCopy, out xPos, out yPos))
                 {
                     gridManager.ChangeBoardAfterChange(ref chessBoard);
                     if (WhitePlayerTurn)
@@ -158,7 +162,14 @@ class Program
                 }
              else
                {
-                   Console.WriteLine("Cannot move here");
+
+                if (CheckMateChecker.IsCheckMate(chessBoardCopy, xPos, yPos))   
+                {
+                    Console.WriteLine("CHECKMATE");
+                    return;
+                }
+                    
+                Console.WriteLine("Cannot move here");
                    continue;
                }
 

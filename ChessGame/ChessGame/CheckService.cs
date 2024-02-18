@@ -26,7 +26,7 @@ namespace ChessGame
         }
 
 
-        public bool CheckingChecks(char[,] board)
+        public bool CheckingChecks(char[,] board, out int x, out int y)
         {
             MoveManager _move = new MoveManager(0,0);
 
@@ -55,7 +55,7 @@ namespace ChessGame
                     if (board[i, j] == 'r')
                     {
                         var pawn = new BlackRock(i, j);
-
+                        x = i; y = j;
                         if (CanCheck(board, _move, pawn))
                             return true;
 
@@ -64,7 +64,7 @@ namespace ChessGame
                     if (board[i, j] == 'b')
                     {
                         var pawn = new BlackBishop(i, j);
-
+                        x = i; y = j;
                         if (CanCheck(board, _move, pawn))
                             return true;
                     }
@@ -73,8 +73,8 @@ namespace ChessGame
                     if (board[i, j] == 'q')
                     {
                         board[kingXPosition, kingYPosition] = ' ';
-                        var pawn = new BlackQueen(i, j);              
-
+                        var pawn = new BlackQueen(i, j);
+                        x = i; y = j;
                         if (CanCheck(board, _move, pawn))
                         { 
                             board[kingXPosition, kingYPosition] = 'K';
@@ -87,7 +87,7 @@ namespace ChessGame
                     if (board[i, j] == 'n')
                     {
                         var pawn = new BlackKnight(i, j);
-
+                        x = i; y = j;
                         if (CanCheck(board, _move, pawn))
                             return true;
                     }
@@ -95,6 +95,7 @@ namespace ChessGame
 
                     if (board[i, j] == 'p')
                     {
+                        x = i; y = j;
                         var pawn = new BlackPawn(i, j);
 
                         if (CanCheck(board, _move, pawn))
@@ -133,7 +134,7 @@ namespace ChessGame
                     if (board[i, j] == 'R')
                     {
                         var pawn = new WhiteRock(i, j);
-
+                        x = i; y = j;
                         if (CanCheck(board, _move, pawn))
                             return true;
 
@@ -142,7 +143,7 @@ namespace ChessGame
                     if (board[i, j] == 'B')
                     {
                         var pawn = new WhiteBishop(i, j);
-
+                        x = i; y = j;
                         if (CanCheck(board, _move, pawn))
                             return true;
                     }
@@ -152,7 +153,7 @@ namespace ChessGame
                     {
                         board[kingXPosition, kingYPosition] = ' ';
                         var pawn = new WhiteQueen(i, j);
-
+                        x = i; y = j;
                         if (CanCheck(board, _move, pawn))
                         {
                             board[kingXPosition, kingYPosition] = 'K';
@@ -164,6 +165,7 @@ namespace ChessGame
 
                     if (board[i, j] == 'N')
                     {
+                        x = i; y = j;
                         var pawn = new WhiteKnight(i, j);
 
                         if (CanCheck(board, _move, pawn))
@@ -173,6 +175,7 @@ namespace ChessGame
 
                     if (board[i, j] == 'P')
                     {
+                        x = i; y = j;
                         var pawn = new WhitePawn(i, j);
 
                         if (CanCheck(board, _move, pawn))
@@ -186,6 +189,7 @@ namespace ChessGame
 
 
             board[kingXPosition, kingYPosition] = 'k';
+            x = 0; y = 0;
             return false;
             
         }

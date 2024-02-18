@@ -178,13 +178,6 @@ namespace ChessGame
                     {
                         for (int i = _pawnManager._pawn.columnPosition - 1; i >= _pawnManager.columnMove; i--)
                         {
-                            if (board[_pawnManager._pawn.rowPosition, i] != ' ' && i != _pawnManager.rowMove)
-                            {
-
-                                canMove = false;
-                                break;
-
-                            }
 
                             if (i == _pawnManager.rowMove && attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
                             {
@@ -203,13 +196,6 @@ namespace ChessGame
                     {
                         for (int i = _pawnManager._pawn.columnPosition + 1; i <= _pawnManager.columnMove; i++)
                         {
-                            if (board[_pawnManager._pawn.rowPosition, i] != ' ' && i != _pawnManager.rowMove)
-                            {
-
-                                canMove = false;
-                                break;
-
-                            }
 
                             if (i == _pawnManager.rowMove && attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
                             {
@@ -505,13 +491,6 @@ namespace ChessGame
                     {
                         for (int i = _pawnManager._pawn.columnPosition - 1; i >= _pawnManager.columnMove; i--)
                         {
-                            if (board[_pawnManager._pawn.rowPosition, i] != ' ' && i != _pawnManager.rowMove)
-                            {
-
-                                canMove = false;
-                                break;
-
-                            }
 
                             if (i == _pawnManager.rowMove && attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
                             {
@@ -530,13 +509,6 @@ namespace ChessGame
                     {
                         for (int i = _pawnManager._pawn.columnPosition + 1; i <= _pawnManager.columnMove; i++)
                         {
-                            if (board[_pawnManager._pawn.rowPosition, i] != ' ' && i != _pawnManager.rowMove)
-                            {
-
-                                canMove = false;
-                                break;
-
-                            }
 
                             if (i == _pawnManager.rowMove && attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
                             {

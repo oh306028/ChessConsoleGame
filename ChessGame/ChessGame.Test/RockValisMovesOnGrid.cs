@@ -307,6 +307,137 @@ namespace ChessGame.Test
 
         }
 
+
+
+        [Fact]
+
+        public void ValidRockAttackingMovesOnGrid_ForValidMoves_ReturnTrue()    
+        {
+            //arrange
+            bool canMove = true;
+           
        
+            var grid = new GridCreator();
+            var board = grid.InitGrid();
+            board[6, 5] = 'R';
+            board[6, 3] = 'q';
+
+            var pawn = new WhiteRock(6, 5);
+            var move = new MoveManager(6, 3);
+            var _pawnManager = new PawnManager(pawn, move);
+            var attackService = new PieceAttacksService(pawn);
+
+
+
+            //act
+
+            if (_pawnManager._pawn.symbol == 'R' || _pawnManager._pawn.symbol == 'r' || _pawnManager._pawn.symbol == 'Q' || _pawnManager._pawn.symbol == 'q')
+            {
+                if (_pawnManager.rowMove != _pawnManager._pawn.rowPosition)
+                {
+                    if (_pawnManager._pawn.rowPosition > _pawnManager.rowMove && _pawnManager._pawn.columnPosition == _pawnManager.columnMove)
+                    {
+                        for (int i = _pawnManager._pawn.rowPosition - 1; i >= _pawnManager.rowMove; i--)
+                        {
+                            if (board[i, _pawnManager._pawn.columnPosition] != ' ' && i != _pawnManager.rowMove)
+                            {
+
+                                canMove = false;
+                                break;
+
+                            }
+
+                            if (i == _pawnManager.rowMove && attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
+                            {
+                                canMove = true;
+                            }
+
+                            if (board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ' && !attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
+                            {
+                                canMove = false;
+                            }
+
+                        }
+                    }
+                    else if (_pawnManager._pawn.rowPosition < _pawnManager.rowMove && _pawnManager._pawn.columnPosition == _pawnManager.columnMove)
+                    {
+                        for (int i = _pawnManager._pawn.rowPosition + 1; i <= _pawnManager.rowMove; i++)
+                        {
+                            if (board[i, _pawnManager._pawn.columnPosition] != ' ' && i != _pawnManager.rowMove)
+                            {
+
+                                canMove = false;
+                                break;
+
+                            }
+
+                            if (i == _pawnManager.rowMove && attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
+                            {
+                                canMove = true;
+                            }
+
+                            if (board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ' && !attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
+                            {
+                                canMove = false;
+                            }
+
+
+
+                        }
+                    }
+
+                }
+
+
+
+                if (_pawnManager.columnMove != _pawnManager._pawn.columnPosition && _pawnManager._pawn.rowPosition == _pawnManager.rowMove)
+                {
+                    if (_pawnManager._pawn.columnPosition > _pawnManager.columnMove)
+                    {
+                        for (int i = _pawnManager._pawn.columnPosition - 1; i >= _pawnManager.columnMove; i--)
+                        {
+                            
+                            if (i == _pawnManager.rowMove && attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
+                            {
+                                canMove = true;
+                            }
+
+                            if (board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ' && !attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
+                            {
+                                canMove = false;
+                            }
+
+
+                        }
+                    }
+                    else
+                    {
+                        for (int i = _pawnManager._pawn.columnPosition + 1; i <= _pawnManager.columnMove; i++)
+                        {
+                            
+                            if (i == _pawnManager.rowMove && attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
+                            {
+                                canMove = true;
+                            }
+
+                            if (board[_pawnManager.rowMove, _pawnManager.columnMove] != ' ' && !attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
+                            {
+                                canMove = false;
+                            }
+
+
+                        }
+                    }
+
+                }
+            }
+
+
+            //assert
+            Assert.True(canMove);
+
+        }
+
+
     }
 }

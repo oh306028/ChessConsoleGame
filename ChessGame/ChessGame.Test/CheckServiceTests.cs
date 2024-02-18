@@ -30,14 +30,16 @@ namespace ChessGame.Test
             board[7, 5] = ' ';
 
 
+            int x; int y;
+
             var boardCopy = (char[,])board.Clone();
             gridManager.ChangeBoardAfterChange(ref boardCopy);
-            if (!checkService.CheckingChecks(boardCopy))
+            if (!checkService.CheckingChecks(boardCopy, out x, out y))
             {
                 gridManager.ChangeBoardAfterChange(ref board);
             }
 
-            var result = checkService.CheckingChecks(board);
+            var result = checkService.CheckingChecks(board, out x, out y);
 
 
 
@@ -68,15 +70,15 @@ namespace ChessGame.Test
             board[6, 6] = 'q';
             board[7, 5] = ' ';
 
-
+            int x; int y;
             var boardCopy = (char[,])board.Clone();
             gridManager.ChangeBoardAfterChange(ref boardCopy);
-            if (!checkService.CheckingChecks(boardCopy))
+            if (!checkService.CheckingChecks(boardCopy, out x, out y))
             {
                 gridManager.ChangeBoardAfterChange(ref board);
             }
 
-            var result = checkService.CheckingChecks(board);
+            var result = checkService.CheckingChecks(board, out x, out y);
 
 
 
@@ -108,14 +110,14 @@ namespace ChessGame.Test
             board[6, 6] = 'q';
 
             var boardCopy = (char[,])board.Clone();
+            int x; int y;
 
-
-            if (!checkService.CheckingChecks(board))
+            if (!checkService.CheckingChecks(board, out x, out y))
             {
                 gridManager.ChangeBoardAfterChange(ref boardCopy);
             }
 
-            var result = checkService.CheckingChecks(boardCopy);
+            var result = checkService.CheckingChecks(boardCopy, out x, out y);
 
             if (result)
             {
@@ -147,14 +149,14 @@ namespace ChessGame.Test
          
             board[6, 6] = 'q';
 
+            int x; int y;
 
-
-            if (!checkService.CheckingChecks(board))
+            if (!checkService.CheckingChecks(board, out x, out y))
             {
                 gridManager.ChangeBoardAfterChange(ref board);
             }
 
-            var result = checkService.CheckingChecks(board);
+            var result = checkService.CheckingChecks(board, out x, out y);
 
 
 
@@ -178,14 +180,14 @@ namespace ChessGame.Test
 
             board[3, 7] = 'Q';
 
+            int x; int y;
 
-
-            if (!checkService.CheckingChecks(board))
+            if (!checkService.CheckingChecks(board, out x, out y))
             {
                 gridManager.ChangeBoardAfterChange(ref board);
             }
 
-            var result = checkService.CheckingChecks(board);
+            var result = checkService.CheckingChecks(board, out x, out y);
 
 
 
@@ -207,8 +209,8 @@ namespace ChessGame.Test
           //  board[7, 4] = ' ';
             board[x, y] = 'n';
 
-
-            var result = checkService.CheckingChecks(board);
+            int x1; int y1;
+            var result = checkService.CheckingChecks(board, out x1, out y1);
 
 
 
@@ -229,8 +231,8 @@ namespace ChessGame.Test
             //  board[7, 4] = ' ';
             board[x, y] = 'n';
 
-
-            var result = checkService.CheckingChecks(board);
+            int x1; int y1;
+            var result = checkService.CheckingChecks(board, out x1, out y1);
 
 
 
@@ -259,8 +261,8 @@ namespace ChessGame.Test
             board[7, 5] = ' ';
             board[x, y] = 'q';
 
-
-            var result = checkService.CheckingChecks(board);
+            int x1; int y1;
+            var result = checkService.CheckingChecks(board, out x1, out y1);
 
 
 
@@ -286,9 +288,9 @@ namespace ChessGame.Test
 
          
             board[x, y] = 'q';
+            int x1; int y1;
 
-
-            var result = checkService.CheckingChecks(board);
+            var result = checkService.CheckingChecks(board, out x1, out y1);
 
 
 
@@ -315,8 +317,8 @@ namespace ChessGame.Test
 
             board[x, y] = 'Q';
 
-
-            var result = checkService.CheckingChecks(board);
+            int x1; int y1; 
+            var result = checkService.CheckingChecks(board, out x1, out y1);
 
 
 
