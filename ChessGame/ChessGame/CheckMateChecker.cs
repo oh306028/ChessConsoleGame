@@ -6,21 +6,23 @@ using System.Threading.Tasks;
 
 namespace ChessGame
 {
-    public static class CheckMateChecker
+    public  class CheckMateChecker
     {
-        private static int kingXPosition;
-        private static int kingYPosition;
-        private static bool CanMoveTioDiscardCheck(char[,] board, IPawn pawn, int xPosChecker, int yPosCheker)
+        private  int kingXPosition;
+        private  int kingYPosition;
+        private  List<Tuple<int, int>> Coordinates = new List<Tuple<int, int>>();
+
+        private void CreateAListOfCordinatesToDiscardCheck(int xPosChecker, int yPosCheker, char[,] board)
         {
-
-            var pairList = new List<Tuple<int, int>>();
-
+                 
             var symbol = board[xPosChecker, yPosCheker];
 
-            if(symbol == 'P')
-            {
 
+            if (symbol == 'p' || symbol == 'n')
+            {
+                Coordinates.Add(Tuple.Create(xPosChecker, yPosCheker));
             }
+
 
             if (symbol == 'q' || symbol == 'r')
             {
@@ -28,7 +30,7 @@ namespace ChessGame
                 {
                     for (int i = xPosChecker; i < kingXPosition; i++)
                     {
-                        pairList.Add(Tuple.Create(i, yPosCheker));
+                        Coordinates.Add(Tuple.Create(i, yPosCheker));
 
                     }
                 }
@@ -37,7 +39,7 @@ namespace ChessGame
                 {
                     for (int i = xPosChecker; i < kingXPosition; i--)
                     {
-                        pairList.Add(Tuple.Create(i, yPosCheker));
+                        Coordinates.Add(Tuple.Create(i, yPosCheker));
 
                     }
                 }
@@ -46,7 +48,7 @@ namespace ChessGame
                 {
                     for (int i = yPosCheker; i < kingXPosition; i++)
                     {
-                        pairList.Add(Tuple.Create(kingXPosition, i));
+                        Coordinates.Add(Tuple.Create(kingXPosition, i));
 
                     }
                 }
@@ -55,14 +57,14 @@ namespace ChessGame
                 {
                     for (int i = yPosCheker; i < kingXPosition; i--)
                     {
-                        pairList.Add(Tuple.Create(kingXPosition, i));
+                        Coordinates.Add(Tuple.Create(kingXPosition, i));
 
                     }
                 }
 
             }
 
-
+            
             if (symbol == 'b' || symbol == 'q')
             {
 
@@ -70,7 +72,7 @@ namespace ChessGame
                 {
                     while (kingXPosition > xPosChecker && kingYPosition > yPosCheker)
                     {
-                        pairList.Add(Tuple.Create(xPosChecker, yPosCheker));
+                        Coordinates.Add(Tuple.Create(xPosChecker, yPosCheker));
                         xPosChecker--;
                         yPosCheker--;
 
@@ -82,7 +84,7 @@ namespace ChessGame
                 {
                     while (kingXPosition < xPosChecker && kingYPosition > yPosCheker)
                     {
-                        pairList.Add(Tuple.Create(xPosChecker, yPosCheker));
+                        Coordinates.Add(Tuple.Create(xPosChecker, yPosCheker));
                         xPosChecker++;
                         yPosCheker--;
 
@@ -93,7 +95,7 @@ namespace ChessGame
                 {
                     while (kingXPosition < xPosChecker && kingYPosition > yPosCheker)
                     {
-                        pairList.Add(Tuple.Create(xPosChecker, yPosCheker));
+                        Coordinates.Add(Tuple.Create(xPosChecker, yPosCheker));
                         xPosChecker--;
                         yPosCheker++;
 
@@ -105,19 +107,23 @@ namespace ChessGame
                 {
                     while (kingXPosition < xPosChecker && kingYPosition > yPosCheker)
                     {
-                        pairList.Add(Tuple.Create(xPosChecker, yPosCheker));
+                        Coordinates.Add(Tuple.Create(xPosChecker, yPosCheker));
                         xPosChecker++;
                         yPosCheker++;
 
                     }
                 }
             }
+            
+        }
 
+        private bool CanMoveTioDiscardCheck(char[,] board, IPawn pawn, int xPosChecker, int yPosChecker) 
+        {          
 
-            int listcount = pairList.Count() - 1;
+            int listcount = Coordinates.Count() - 1;
             while (listcount >= 0)
             {
-                var pawnManager = new PawnManager(pawn, new MoveManager(pairList[listcount].Item1, pairList[listcount].Item2));
+                var pawnManager = new PawnManager(pawn, new MoveManager(Coordinates[listcount].Item1, Coordinates[listcount].Item2));
                 var grid = new GridManager(pawnManager);
 
                 if (grid.CheckBoardBeforeChange(board))
@@ -131,7 +137,8 @@ namespace ChessGame
 
         }
 
-            public static bool IsCheckMate(char[,] board, int xPosChecker, int yPosCheker)  
+
+            public bool IsCheckMate(char[,] board, int xPosChecker, int yPosCheker)  
             {
 
             for (int i = 1; i < 9; i++)
@@ -146,6 +153,7 @@ namespace ChessGame
                 }
             }
 
+            CreateAListOfCordinatesToDiscardCheck(xPosChecker, yPosCheker, board);
 
 
             for (int i = 1; i < 9; i++)
@@ -194,7 +202,7 @@ namespace ChessGame
                             return false;
                     }
 
-
+                    
                     if (board[i, j] == 'P')
                     {
                         var pawn = new WhitePawn(i, j);

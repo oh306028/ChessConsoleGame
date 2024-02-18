@@ -25,12 +25,18 @@ class Program
         var chessBoard = gridCreator.InitGrid();
         var checkService = new CheckService();
         var playerTurn = new PlayerTurnService();
+        var checkMateService = new CheckMateChecker();
 
         bool WhitePlayerTurn = true;
 
 
+        chessBoard[4, 2] = 'q';
+        chessBoard[8, 1] = 'K';
+        chessBoard[7, 1] = ' ';
+        chessBoard[8, 2] = 'P';
+        chessBoard[8, 3] = 'P';
+     
 
-        chessBoard[5, 5] = 'q';
         show(chessBoard);
 
 
@@ -161,7 +167,7 @@ class Program
                 else
                 {
                     
-                   if (CheckMateChecker.IsCheckMate(chessBoardCopy, xPos, yPos))
+                   if (checkMateService.IsCheckMate(chessBoardCopy, xPos, yPos))
                    {
                        Console.WriteLine("CHECKMATE");
                        return;
@@ -184,7 +190,7 @@ class Program
                 {
 
                     
-                    if (CheckMateChecker.IsCheckMate(chessBoardCopy, xPos, yPos))
+                    if (checkMateService.IsCheckMate(chessBoardCopy, xPos, yPos))
                     {
                         Console.WriteLine("CHECKMATE");
                         return;
@@ -197,7 +203,6 @@ class Program
             }
 
             
-
 
             Console.WriteLine();
             Console.WriteLine();

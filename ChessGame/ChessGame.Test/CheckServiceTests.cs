@@ -34,12 +34,12 @@ namespace ChessGame.Test
 
             var boardCopy = (char[,])board.Clone();
             gridManager.ChangeBoardAfterChange(ref boardCopy);
-            if (!checkService.CheckingChecks(boardCopy, out x, out y))
+            if (!checkService.CanBlackPiecesCheck(boardCopy, out x, out y))
             {
                 gridManager.ChangeBoardAfterChange(ref board);
             }
 
-            var result = checkService.CheckingChecks(board, out x, out y);
+            var result = checkService.CanBlackPiecesCheck(board, out x, out y);
 
 
 
@@ -73,12 +73,12 @@ namespace ChessGame.Test
             int x; int y;
             var boardCopy = (char[,])board.Clone();
             gridManager.ChangeBoardAfterChange(ref boardCopy);
-            if (!checkService.CheckingChecks(boardCopy, out x, out y))
+            if (!checkService.CanBlackPiecesCheck(boardCopy, out x, out y))
             {
                 gridManager.ChangeBoardAfterChange(ref board);
             }
 
-            var result = checkService.CheckingChecks(board, out x, out y);
+            var result = checkService.CanBlackPiecesCheck(board, out x, out y);
 
 
 
@@ -112,12 +112,12 @@ namespace ChessGame.Test
             var boardCopy = (char[,])board.Clone();
             int x; int y;
 
-            if (!checkService.CheckingChecks(board, out x, out y))
+            if (!checkService.CanBlackPiecesCheck(board, out x, out y))
             {
                 gridManager.ChangeBoardAfterChange(ref boardCopy);
             }
 
-            var result = checkService.CheckingChecks(boardCopy, out x, out y);
+            var result = checkService.CanBlackPiecesCheck(boardCopy, out x, out y);
 
             if (result)
             {
@@ -151,12 +151,12 @@ namespace ChessGame.Test
 
             int x; int y;
 
-            if (!checkService.CheckingChecks(board, out x, out y))
+            if (!checkService.CanBlackPiecesCheck(board, out x, out y))
             {
                 gridManager.ChangeBoardAfterChange(ref board);
             }
 
-            var result = checkService.CheckingChecks(board, out x, out y);
+            var result = checkService.CanBlackPiecesCheck(board, out x, out y);
 
 
 
@@ -182,12 +182,12 @@ namespace ChessGame.Test
 
             int x; int y;
 
-            if (!checkService.CheckingChecks(board, out x, out y))
+            if (!checkService.CanBlackPiecesCheck(board, out x, out y))
             {
                 gridManager.ChangeBoardAfterChange(ref board);
             }
 
-            var result = checkService.CheckingChecks(board, out x, out y);
+            var result = checkService.CanBlackPiecesCheck(board, out x, out y);
 
 
 
@@ -210,7 +210,7 @@ namespace ChessGame.Test
             board[x, y] = 'n';
 
             int x1; int y1;
-            var result = checkService.CheckingChecks(board, out x1, out y1);
+            var result = checkService.CanBlackPiecesCheck(board, out x1, out y1);
 
 
 
@@ -232,7 +232,7 @@ namespace ChessGame.Test
             board[x, y] = 'n';
 
             int x1; int y1;
-            var result = checkService.CheckingChecks(board, out x1, out y1);
+            var result = checkService.CanBlackPiecesCheck(board, out x1, out y1);
 
 
 
@@ -262,7 +262,7 @@ namespace ChessGame.Test
             board[x, y] = 'q';
 
             int x1; int y1;
-            var result = checkService.CheckingChecks(board, out x1, out y1);
+            var result = checkService.CanBlackPiecesCheck(board, out x1, out y1);
 
 
 
@@ -290,7 +290,7 @@ namespace ChessGame.Test
             board[x, y] = 'q';
             int x1; int y1;
 
-            var result = checkService.CheckingChecks(board, out x1, out y1);
+            var result = checkService.CanBlackPiecesCheck(board, out x1, out y1);
 
 
 
@@ -318,7 +318,7 @@ namespace ChessGame.Test
             board[x, y] = 'Q';
 
             int x1; int y1; 
-            var result = checkService.CheckingChecks(board, out x1, out y1);
+            var result = checkService.CanBlackPiecesCheck(board, out x1, out y1);
 
 
 
