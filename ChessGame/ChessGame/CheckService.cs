@@ -25,8 +25,8 @@ namespace ChessGame
             return false;
         }
 
-
-        public bool CheckingChecks(char[,] board, out int x, out int y)
+            
+        public bool CanBlackPiecesCheck(char[,] board, out int x, out int y)    
         {
             MoveManager _move = new MoveManager(0,0);
 
@@ -107,10 +107,15 @@ namespace ChessGame
             }
 
             board[kingXPosition, kingYPosition] = 'K';
+            x = 0; y = 0;
+            return false;
+
+        }
 
 
-            //FOR WHITE PIECES
-
+        public bool CanWhitePiecesCheck(char[,] board, out int x, out int y)    
+        {
+            MoveManager _move = new MoveManager(0, 0);
 
             for (int i = 1; i < 9; i++)
             {
@@ -186,12 +191,9 @@ namespace ChessGame
 
             }
 
-
-
             board[kingXPosition, kingYPosition] = 'k';
             x = 0; y = 0;
             return false;
-            
         }
 
     }

@@ -148,33 +148,55 @@ class Program
 
             int xPos = 0;
             int yPos = 0;
-             if (!checkService.CheckingChecks(chessBoardCopy, out xPos, out yPos))
+
+
+            if (WhitePlayerTurn)
+            {
+                if (!checkService.CanBlackPiecesCheck(chessBoardCopy, out xPos, out yPos))
                 {
-                    gridManager.ChangeBoardAfterChange(ref chessBoard);
-                    if (WhitePlayerTurn)
-                    {
-                        WhitePlayerTurn = false;
-                    }
-                    else
-                    {
-                        WhitePlayerTurn = true;
-                    }
-                }
-             else
-               {
+                    gridManager.ChangeBoardAfterChange(ref chessBoard);          
+                    WhitePlayerTurn = false; 
 
-                if (CheckMateChecker.IsCheckMate(chessBoardCopy, xPos, yPos))   
+                }
+                else
                 {
-                    Console.WriteLine("CHECKMATE");
-                    return;
+                    /*
+                   if (CheckMateChecker.IsCheckMate(chessBoardCopy, xPos, yPos))
+                   {
+                       Console.WriteLine("CHECKMATE");
+                       return;
+                   }
+                   */
+                    Console.WriteLine("Cannot move here");
+                    continue;
                 }
-                    
-                Console.WriteLine("Cannot move here");
-                   continue;
-               }
+                
+            }
+            else
+            {
+                if (!checkService.CanWhitePiecesCheck(chessBoardCopy, out xPos, out yPos))
+                {
+                    gridManager.ChangeBoardAfterChange(ref chessBoard);                  
+                    WhitePlayerTurn = true;
+                        
+                }
+                else
+                {
 
+                    /*
+                    if (CheckMateChecker.IsCheckMate(chessBoardCopy, xPos, yPos))
+                    {
+                        Console.WriteLine("CHECKMATE");
+                        return;
+                    }
+                    */
 
+                    Console.WriteLine("Cannot move here");
+                    continue;
+                }
+            }
 
+            
 
 
             Console.WriteLine();
