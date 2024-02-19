@@ -10,15 +10,15 @@ namespace ChessGame
     {
         private  int kingXPosition;
         private  int kingYPosition;
-        private  List<Tuple<int, int>> Coordinates = new List<Tuple<int, int>>();
+        private List<Tuple<int, int>> Coordinates;
 
-        private void CreateAListOfCordinatesToDiscardCheck(int xPosChecker, int yPosCheker, char[,] board)
+        private void CreateAListOfCordinatesToDiscardCheckForWhitePieces(int xPosChecker, int yPosCheker, char[,] board)    
         {
-                 
+            Coordinates = new List<Tuple<int, int>>();
             var symbol = board[xPosChecker, yPosCheker];
 
 
-            if (symbol == 'p' || symbol == 'n')
+            if (symbol == 'p' || symbol == 'n' )
             {
                 Coordinates.Add(Tuple.Create(xPosChecker, yPosCheker));
             }
@@ -37,7 +37,7 @@ namespace ChessGame
 
                 if (kingXPosition < xPosChecker && kingYPosition == yPosCheker)
                 {
-                    for (int i = xPosChecker; i < kingXPosition; i--)
+                    for (int i = xPosChecker; i > kingXPosition; i--)
                     {
                         Coordinates.Add(Tuple.Create(i, yPosCheker));
 
@@ -55,7 +55,7 @@ namespace ChessGame
 
                 if (kingXPosition == xPosChecker && kingYPosition < yPosCheker)
                 {
-                    for (int i = yPosCheker; i < kingXPosition; i--)
+                    for (int i = yPosCheker; i > kingXPosition; i--)
                     {
                         Coordinates.Add(Tuple.Create(kingXPosition, i));
 
@@ -65,7 +65,7 @@ namespace ChessGame
             }
 
             
-            if (symbol == 'b' || symbol == 'q')
+            if (symbol == 'b' || symbol == 'q' )
             {
 
                 if (kingXPosition > xPosChecker && kingYPosition > yPosCheker)
@@ -115,6 +115,110 @@ namespace ChessGame
                 }
             }
             
+        }   
+        private void CreateAListOfCordinatesToDiscardCheckForBlackPieces(int xPosChecker, int yPosCheker, char[,] board)      
+        {
+            Coordinates = new List<Tuple<int, int>>();
+            var symbol = board[xPosChecker, yPosCheker];
+
+
+            if (symbol == 'P' || symbol == 'N')
+            {
+                Coordinates.Add(Tuple.Create(xPosChecker, yPosCheker));
+            }
+
+
+            if (symbol == 'Q' || symbol == 'R')
+            {
+                if (kingXPosition > xPosChecker && kingYPosition == yPosCheker)
+                {
+                    for (int i = xPosChecker; i < kingXPosition; i++)
+                    {
+                        Coordinates.Add(Tuple.Create(i, yPosCheker));
+
+                    }
+                }
+
+                if (kingXPosition < xPosChecker && kingYPosition == yPosCheker)
+                {
+                    for (int i = xPosChecker; i > kingXPosition; i--)
+                    {
+                        Coordinates.Add(Tuple.Create(i, yPosCheker));
+
+                    }
+                }
+
+                if (kingXPosition == xPosChecker && kingYPosition > yPosCheker)
+                {
+                    for (int i = yPosCheker; i < kingXPosition; i++)
+                    {
+                        Coordinates.Add(Tuple.Create(kingXPosition, i));
+
+                    }
+                }
+
+                if (kingXPosition == xPosChecker && kingYPosition < yPosCheker)
+                {
+                    for (int i = yPosCheker; i > kingYPosition; i--)
+                    {
+                        Coordinates.Add(Tuple.Create(kingXPosition, i));
+
+                    }
+                }
+
+            }
+
+
+            if (symbol == 'B' || symbol == 'Q')
+            {
+
+                if (kingXPosition > xPosChecker && kingYPosition > yPosCheker)
+                {
+                    while (kingXPosition > xPosChecker && kingYPosition > yPosCheker)
+                    {
+                        Coordinates.Add(Tuple.Create(xPosChecker, yPosCheker));
+                        xPosChecker--;
+                        yPosCheker--;
+
+                    }
+
+                }
+
+                if (kingXPosition < xPosChecker && kingYPosition > yPosCheker)
+                {
+                    while (kingXPosition < xPosChecker && kingYPosition > yPosCheker)
+                    {
+                        Coordinates.Add(Tuple.Create(xPosChecker, yPosCheker));
+                        xPosChecker++;
+                        yPosCheker--;
+
+                    }
+                }
+
+                if (kingXPosition > xPosChecker && kingYPosition < yPosCheker)
+                {
+                    while (kingXPosition < xPosChecker && kingYPosition > yPosCheker)
+                    {
+                        Coordinates.Add(Tuple.Create(xPosChecker, yPosCheker));
+                        xPosChecker--;
+                        yPosCheker++;
+
+                    }
+                }
+
+
+                if (kingXPosition < xPosChecker && kingYPosition < yPosCheker)
+                {
+                    while (kingXPosition < xPosChecker && kingYPosition > yPosCheker)
+                    {
+                        Coordinates.Add(Tuple.Create(xPosChecker, yPosCheker));
+                        xPosChecker++;
+                        yPosCheker++;
+
+                    }
+                }
+            }
+
         }
 
         private bool CanMoveTioDiscardCheck(char[,] board, IPawn pawn, int xPosChecker, int yPosChecker) 
@@ -138,7 +242,7 @@ namespace ChessGame
         }
 
 
-            public bool IsCheckMate(char[,] board, int xPosChecker, int yPosCheker)  
+        public bool IsCheckMateForBlack(char[,] board, int xPosChecker, int yPosCheker)     
             {
 
             for (int i = 1; i < 9; i++)
@@ -153,7 +257,7 @@ namespace ChessGame
                 }
             }
 
-            CreateAListOfCordinatesToDiscardCheck(xPosChecker, yPosCheker, board);
+            CreateAListOfCordinatesToDiscardCheckForWhitePieces(xPosChecker, yPosCheker, board);    
 
 
             for (int i = 1; i < 9; i++)
@@ -211,6 +315,89 @@ namespace ChessGame
                             return false;
                     }
                     
+                }
+
+            }
+
+
+
+            return true;
+        }
+
+        public bool IsCheckMateForWhite(char[,] board, int xPosChecker, int yPosCheker) 
+        {
+
+            for (int i = 1; i < 9; i++)
+            {
+                for (int j = 1; j < 9; j++)
+                {
+                    if (board[i, j] == 'k')
+                    {
+                        kingXPosition = i; kingYPosition = j;
+                        break;
+                    }
+                }
+            }
+
+            
+            CreateAListOfCordinatesToDiscardCheckForBlackPieces(xPosChecker, yPosCheker, board);
+
+
+            for (int i = 1; i < 9; i++)
+            {
+                for (int j = 1; j < 9; j++)
+                {
+
+                    if (board[i, j] == 'r')
+                    {
+                        var pawn = new BlackRock(i, j);
+
+                        if (CanMoveTioDiscardCheck(board, pawn, xPosChecker, yPosCheker))
+                            return false;
+
+                    }
+
+
+
+                    if (board[i, j] == 'b')
+                    {
+                        var pawn = new BlackBishop(i, j);
+
+                        if (CanMoveTioDiscardCheck(board, pawn, xPosChecker, yPosCheker))
+                            return false;
+                    }
+
+
+                    if (board[i, j] == 'q')
+                    {
+
+                        var pawn = new BlackQueen(i, j);
+
+                        if (CanMoveTioDiscardCheck(board, pawn, xPosChecker, yPosCheker))
+                        {
+                            return false;
+                        }
+
+                    }
+
+
+                    if (board[i, j] == 'n')
+                    {
+                        var pawn = new BlackKnight(i, j);
+
+                        if (CanMoveTioDiscardCheck(board, pawn, xPosChecker, yPosCheker))
+                            return false;
+                    }
+
+
+                    if (board[i, j] == 'p')
+                    {
+                        var pawn = new BlackPawn(i, j);
+                      
+                        if (CanMoveTioDiscardCheck(board, pawn, xPosChecker, yPosCheker))
+                            return false;
+                    }
+
                 }
 
             }

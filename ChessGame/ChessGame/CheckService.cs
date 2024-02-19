@@ -159,7 +159,7 @@ namespace ChessGame
                         x = i; y = j;
                         if (CanCheck(board, _move, pawn))
                         {
-                            board[kingXPosition, kingYPosition] = 'K';
+                            board[kingXPosition, kingYPosition] = 'k';
                             return true;
                         }
 

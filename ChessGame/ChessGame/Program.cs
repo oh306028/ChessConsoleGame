@@ -29,13 +29,15 @@ class Program
 
         bool WhitePlayerTurn = true;
 
+        chessBoard[3, 2] = 'Q';
 
-        chessBoard[4, 2] = 'q';
-        chessBoard[8, 1] = 'K';
-        chessBoard[7, 1] = ' ';
-        chessBoard[8, 2] = 'P';
-        chessBoard[8, 3] = 'P';
-     
+
+        chessBoard[1, 1] = 'k';
+        chessBoard[2, 1] = ' ';
+        chessBoard[1, 2] = 'p';
+        chessBoard[1, 3] = 'p';
+        chessBoard[1, 5] = ' ';
+
 
         show(chessBoard);
 
@@ -144,7 +146,7 @@ class Program
 
             var pawnManager = new PawnManager(figure, move);
             var gridManager = new GridManager(pawnManager);
-
+            
 
 
 
@@ -167,7 +169,7 @@ class Program
                 else
                 {
                     
-                   if (checkMateService.IsCheckMate(chessBoardCopy, xPos, yPos))
+                   if (checkMateService.IsCheckMateForBlack(chessBoardCopy, xPos, yPos))
                    {
                        Console.WriteLine("CHECKMATE");
                        return;
@@ -190,9 +192,9 @@ class Program
                 {
 
                     
-                    if (checkMateService.IsCheckMate(chessBoardCopy, xPos, yPos))
+                    if (checkMateService.IsCheckMateForWhite(chessBoardCopy, xPos, yPos))
                     {
-                        Console.WriteLine("CHECKMATE");
+                        Console.WriteLine("CHECKMATE"); 
                         return;
                     }
                     

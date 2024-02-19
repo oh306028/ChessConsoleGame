@@ -9,7 +9,90 @@ namespace ChessGame.Test
     public class CheckMateTests
     {
         [Fact]
-        public void CheckMate_ForValidChecks_ReturnFalse2() 
+        public void CheckMateWhite_ForNotValidChecks_ReturnFalse()  
+        {
+            var grid = new GridCreator();
+            var board = grid.InitGrid();
+            var checkService = new CheckService();
+            var move = new MoveManager(3, 1);
+            var pawnTomove = new WhiteQueen(3, 2);
+            var pawnManager = new PawnManager(pawnTomove, move);
+            var gridManager = new GridManager(pawnManager);
+
+            var checkMateChecker = new CheckMateChecker();
+
+            board[3, 2] = 'Q';
+
+            board[1, 1] = 'k';
+            board[2, 1] = ' ';
+            board[1, 2] = 'p';
+            board[1, 3] = 'p';
+            board[1, 5] = 'p';
+
+
+            int x; int y;
+
+            gridManager.ChangeBoardAfterChange(ref board);
+
+
+
+            if (!checkService.CanWhitePiecesCheck(board, out x, out y))
+            {
+
+
+            }
+
+            var result = checkMateChecker.IsCheckMateForWhite(board, x, y);     
+
+
+
+            Assert.False(result);
+        }
+         [Fact]
+        public void CheckMateWhite_ForValidChecks_ReturnTrue()  
+        {
+            var grid = new GridCreator();
+            var board = grid.InitGrid();
+            var checkService = new CheckService();
+            var move = new MoveManager(6, 1);
+            var pawnTomove = new WhiteQueen(6, 2);
+            var pawnManager = new PawnManager(pawnTomove, move);
+            var gridManager = new GridManager(pawnManager);
+
+            var checkMateChecker = new CheckMateChecker();
+
+            board[6, 2] = 'Q';
+
+            board[1, 1] = 'k';
+            board[2, 1] = ' ';
+            board[1, 2] = 'p';
+            board[1, 3] = 'p';
+            board[1, 5] = 'p';
+
+
+            int x; int y;
+
+            gridManager.ChangeBoardAfterChange(ref board);
+
+
+
+            if (!checkService.CanWhitePiecesCheck(board, out x, out y))
+            {
+
+
+            }
+
+            var result = checkMateChecker.IsCheckMateForWhite(board, x, y);
+
+
+
+            Assert.True(result);
+        }
+
+
+
+        [Fact]
+        public void CheckMateBlack_ForValidChecks_ReturnFalse2()    
         {
             var grid = new GridCreator();
             var board = grid.InitGrid();
@@ -41,7 +124,7 @@ namespace ChessGame.Test
 
             }
 
-            var result = checkMateChecker.IsCheckMate(board, x, y);
+            var result = checkMateChecker.IsCheckMateForBlack(board, x, y);
 
 
 
@@ -49,7 +132,7 @@ namespace ChessGame.Test
         }
 
         [Fact]
-        public void CheckMate_ForValidChecks_ReturnTrue()
+        public void CheckMateBlack_ForValidChecks_ReturnTrue()  
         {
             var grid = new GridCreator();
             var board = grid.InitGrid();
@@ -81,14 +164,14 @@ namespace ChessGame.Test
 
             }
 
-            var result = checkMateChecker.IsCheckMate(board, x, y);
+            var result = checkMateChecker.IsCheckMateForBlack(board, x, y);
 
 
 
             Assert.True(result);
         }
         [Fact]
-        public void CheckMate_FornotValidChecks_ReturnFalse()
+        public void CheckMateBlack_FornotValidChecks_ReturnFalse()  
         {
             var grid = new GridCreator();
             var board = grid.InitGrid();
@@ -121,7 +204,7 @@ namespace ChessGame.Test
 
             }
 
-            var result = checkMateChecker.IsCheckMate(board, x, y);
+            var result = checkMateChecker.IsCheckMateForBlack(board, x, y);
 
 
 
