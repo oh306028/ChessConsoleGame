@@ -9,6 +9,52 @@ namespace ChessGame.Test
     public class CheckMateTests
     {
 
+
+        [Fact]
+        public void CheckMateBlack_ForNotValidChecks_ReturnFalse2() 
+        {
+                
+
+            var gridCreator = new GridCreator();
+            var board = gridCreator.InitGrid();
+
+            board[8, 1] = 'K';
+            board[8, 2] = ' ';
+            board[7, 1] = ' ';
+            board[8, 4] = 'p';
+
+            board[4, 7] = 'q';
+            var checkService = new CheckService();
+            var move = new MoveManager(4, 1);
+            var pawnTomove = new BlackQueen(4, 7);      
+            var pawnManager = new PawnManager(pawnTomove, move);
+            var gridManager = new GridManager(pawnManager);
+
+            var checkMateChecker = new CheckMateChecker();
+
+
+
+            int x; int y;
+
+            gridManager.ChangeBoardAfterChange(ref board);
+
+
+            if (!checkService.CanBlackPiecesCheck(board, out x, out y))
+            {
+                    
+
+            }
+
+            var result = checkMateChecker.IsCheckMateForBlack(board, x, y);
+
+
+
+            Assert.False(result);
+        }
+
+
+
+
         [Fact]
         public void CheckMateWhite_ForNotValidChecks_ReturnTru2()   
         {
@@ -201,6 +247,8 @@ namespace ChessGame.Test
             board[7, 1] = ' ';
             board[8, 2] = 'P';
             board[8, 3] = 'P';
+            board[8, 4] = 'P';
+
 
 
             int x; int y;

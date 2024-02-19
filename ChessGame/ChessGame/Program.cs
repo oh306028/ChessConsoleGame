@@ -29,7 +29,13 @@ class Program
 
         bool WhitePlayerTurn = true;
 
+        chessBoard[4, 2] = 'q';
 
+        chessBoard[8, 1] = 'K';
+        chessBoard[7, 1] = ' ';
+        chessBoard[8, 2] = 'P';
+        chessBoard[8, 3] = 'P';
+        chessBoard[8, 4] = 'P';
         show(chessBoard);
 
 

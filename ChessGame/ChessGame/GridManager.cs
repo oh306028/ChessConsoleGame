@@ -97,13 +97,6 @@ namespace ChessGame
             bool canMove = true;
 
 
-            /*
-            if (board[_pawnManager.rowMove, _pawnManager.columnMove] != ' '
-                && (_pawnManager._pawn.symbol == 'P' || _pawnManager._pawn.symbol == 'p') && !_pawnManager._pawn.CanAttack(_pawnManager.rowMove, _pawnManager.columnMove))
-            {
-                return false;
-            }
-            */
 
             if((_pawnManager._pawn.symbol == 'P' || _pawnManager._pawn.symbol == 'p') && _pawnManager._pawn.CanAttack(_pawnManager.rowMove, _pawnManager.columnMove)){
                 if (!attackService.IsAttacking(board, _pawnManager.rowMove, _pawnManager.columnMove))
@@ -358,7 +351,7 @@ namespace ChessGame
 
 
 
-
+            
             char rock = '0';
             if (_pawnManager._pawn.symbol == 'k' || _pawnManager._pawn.symbol == 'K')
             {
@@ -412,6 +405,7 @@ namespace ChessGame
                 }
             }
 
+            
 
             if (_pawnManager.MovePawn() && canMove)
             {
@@ -430,14 +424,6 @@ namespace ChessGame
             bool canMove = true;
 
          
-            /*
-            if (board[_pawnManager.rowMove, _pawnManager.columnMove] != ' '
-                && (_pawnManager._pawn.symbol == 'P' || _pawnManager._pawn.symbol == 'p') && !_pawnManager._pawn.CanAttack(_pawnManager.rowMove, _pawnManager.columnMove))
-            {
-                Console.WriteLine("Cannot move here");
-                return;
-            }
-            */
 
             if ((_pawnManager._pawn.symbol == 'P' || _pawnManager._pawn.symbol == 'p') && _pawnManager._pawn.CanAttack(_pawnManager.rowMove, _pawnManager.columnMove))
             {
