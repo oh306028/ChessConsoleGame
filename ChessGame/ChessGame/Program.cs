@@ -29,15 +29,6 @@ class Program
 
         bool WhitePlayerTurn = true;
 
-        chessBoard[3, 2] = 'Q';
-
-
-        chessBoard[1, 1] = 'k';
-        chessBoard[2, 1] = ' ';
-        chessBoard[1, 2] = 'p';
-        chessBoard[1, 3] = 'p';
-        chessBoard[1, 5] = ' ';
-
 
         show(chessBoard);
 

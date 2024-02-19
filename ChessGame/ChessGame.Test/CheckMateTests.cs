@@ -8,6 +8,57 @@ namespace ChessGame.Test
 {
     public class CheckMateTests
     {
+
+        [Fact]
+        public void CheckMateWhite_ForNotValidChecks_ReturnTru2()   
+        {
+
+
+            var gridCreator = new GridCreator();
+            var board = gridCreator.InitGrid();
+
+            board[1, 3] = 'r';
+            board[1, 2] = ' ';
+            board[1, 4] = ' ';
+            board[1, 6] = ' ';
+            board[1, 7] = ' ';
+            board[1, 8] = 'r';
+            board[2, 5] = ' ';
+            board[2, 7] = ' ';
+            board[3, 3] = 'N';
+            board[5, 7] = 'Q';
+
+
+            var checkService = new CheckService();
+            var move = new MoveManager(1, 4);
+            var pawnTomove = new WhiteQueen(4, 7);
+            var pawnManager = new PawnManager(pawnTomove, move);
+            var gridManager = new GridManager(pawnManager);
+
+            var checkMateChecker = new CheckMateChecker();
+
+      
+
+            int x; int y;
+
+            gridManager.ChangeBoardAfterChange(ref board);
+
+
+            if (!checkService.CanWhitePiecesCheck(board, out x, out y))
+            {
+
+
+            }
+
+            var result = checkMateChecker.IsCheckMateForWhite(board, x, y);
+
+
+
+            Assert.False(result);
+        }
+
+
+
         [Fact]
         public void CheckMateWhite_ForNotValidChecks_ReturnFalse()  
         {

@@ -18,10 +18,7 @@ namespace ChessGame
             var symbol = board[xPosChecker, yPosCheker];
 
 
-            if (symbol == 'p' || symbol == 'n' )
-            {
-                Coordinates.Add(Tuple.Create(xPosChecker, yPosCheker));
-            }
+            Coordinates.Add(Tuple.Create(xPosChecker, yPosCheker));
 
 
             if (symbol == 'q' || symbol == 'r')
@@ -122,10 +119,7 @@ namespace ChessGame
             var symbol = board[xPosChecker, yPosCheker];
 
 
-            if (symbol == 'P' || symbol == 'N')
-            {
-                Coordinates.Add(Tuple.Create(xPosChecker, yPosCheker));
-            }
+            Coordinates.Add(Tuple.Create(xPosChecker, yPosCheker));
 
 
             if (symbol == 'Q' || symbol == 'R')
