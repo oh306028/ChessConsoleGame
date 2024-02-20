@@ -269,6 +269,53 @@ namespace ChessGame.Test
 
             Assert.True(result);
         }
+
+        [Fact]
+        public void CheckMateBlack_ForNotValidChecks_ReturnFalse4()     
+        {
+            var grid = new GridCreator();
+            var board = grid.InitGrid();
+
+            board[4, 2] = 'q';
+
+            board[8, 1] = 'K';
+            board[7, 1] = ' ';
+            board[8, 2] = ' ';
+            board[8, 3] = 'P';
+            board[8, 4] = 'P';
+
+
+            var checkService = new CheckService();
+            var move = new MoveManager(4, 1);
+            var pawnTomove = new BlackQueen(4, 2);
+            var pawnManager = new PawnManager(pawnTomove, move);
+            var gridManager = new GridManager(pawnManager);
+
+            var checkMateChecker = new CheckMateChecker();
+
+
+
+
+
+            int x; int y;
+
+            gridManager.ChangeBoardAfterChange(ref board);
+
+
+
+            if (!checkService.CanBlackPiecesCheck(board, out x, out y))
+            {
+
+
+            }
+
+            var result = checkMateChecker.IsCheckMateForBlack(board, x, y);
+
+
+
+            Assert.False(result);
+        }
+
         [Fact]
         public void CheckMateBlack_FornotValidChecks_ReturnFalse()  
         {

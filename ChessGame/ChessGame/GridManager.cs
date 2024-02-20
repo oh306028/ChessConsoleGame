@@ -55,13 +55,11 @@ namespace ChessGame
 
             }
 
-            
-            if (_pawnManager._pawn.symbol == 'k' && board[_pawnManager.rowMove, _pawnManager.columnMove] == 'r')
-            {
-                rock = 'r';
 
-                if (board[1, 5] != 'k' && board[1, _pawnManager.columnMove] != 'r')
-                    return false;
+            rock = 'r';
+
+            if (board[1, 5] != 'k' && board[1, _pawnManager.columnMove] != 'r')
+                return false;
 
                 if (_pawnManager.columnMove > _pawnManager._pawn.columnPosition)
                 {
@@ -80,8 +78,6 @@ namespace ChessGame
                             return false;
                     }
                 }
-
-            }
 
             return true;
         }

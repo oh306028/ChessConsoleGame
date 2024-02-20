@@ -163,6 +163,7 @@ namespace ChessGame.Test
             Assert.True(result);
         }
 
+
         [Fact]
 
         public void CheckService_WHITEPIECESCheckAfterSomePieceMove_FromAnotherPiece_ReturnsTrue()  
@@ -187,12 +188,13 @@ namespace ChessGame.Test
                 gridManager.ChangeBoardAfterChange(ref board);
             }
 
-            var result = checkService.CanBlackPiecesCheck(board, out x, out y);
+            var result = checkService.CanWhitePiecesCheck(board, out x, out y);
 
 
 
             Assert.True(result);
         }
+
 
         [Theory]
         [InlineData(6, 5)]

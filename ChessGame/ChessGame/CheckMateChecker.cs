@@ -264,6 +264,35 @@ namespace ChessGame
 
             return false;
         }
+        private bool CanBlackKingEscapeCheckMate(char[,] board) 
+        {
+            var king = new BlackKing(kingXPosition, kingYPosition);
+                
+            var kingMoves = new List<Tuple<int, int>>() { Tuple.Create(kingXPosition-1, kingYPosition-1), Tuple.Create(kingXPosition + 1, kingYPosition + 1),
+                Tuple.Create(kingXPosition - 1, kingYPosition),  Tuple.Create(kingXPosition + 1, kingYPosition),  Tuple.Create(kingXPosition - 1, kingYPosition)
+            , Tuple.Create(kingXPosition - 1, kingYPosition + 1),  Tuple.Create(kingXPosition + 1, kingYPosition - 1),  Tuple.Create(kingXPosition , kingYPosition - 1),
+             Tuple.Create(kingXPosition, kingYPosition + 1)};
+
+
+            foreach (var kingMove in kingMoves)
+            {
+                var move = new MoveManager(kingMove.Item1, kingMove.Item2);
+                if (!move.ValidCordinates())
+                    continue;
+
+                var pawnManager = new PawnManager(king, move);
+                var grid = new GridManager(pawnManager);
+
+
+                if (grid.CheckBoardBeforeChange(board) && !Coordinates.Contains(kingMove))
+                {
+                    return true;
+                }
+
+            }
+
+            return false;
+        }
 
 
         public bool IsCheckMateForBlack(char[,] board, int xPosChecker, int yPosCheker)     
@@ -283,8 +312,10 @@ namespace ChessGame
 
             CreateAListOfCordinatesToDiscardCheckForWhitePieces(xPosChecker, yPosCheker, board);
 
+            
             if (CanWhiteKingEscapeCheckMate(board))
                 return false;
+            
 
             for (int i = 1; i < 9; i++)
             {
@@ -368,7 +399,10 @@ namespace ChessGame
             
             CreateAListOfCordinatesToDiscardCheckForBlackPieces(xPosChecker, yPosCheker, board);
 
-    
+            
+            if (CanBlackKingEscapeCheckMate(board)) 
+                return false;
+            
 
             for (int i = 1; i < 9; i++)
             {

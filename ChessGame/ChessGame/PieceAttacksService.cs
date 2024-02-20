@@ -23,7 +23,11 @@ namespace ChessGame
 
         public bool IsAttacking(char[,] board, int xMove, int yMove)    
         {
-           
+           if(_pawn.symbol == 'k' || _pawn.symbol == 'K')
+            {
+                BlackPieces.Add('k');
+                WhitePieces.Add('K');
+            }
 
             if (BlackPieces.Contains(_pawn.symbol))
             {
