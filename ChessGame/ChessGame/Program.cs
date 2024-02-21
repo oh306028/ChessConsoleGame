@@ -162,7 +162,7 @@ class Program
                     
                    if (checkMateService.IsCheckMateForBlack(chessBoardCopy, xPos, yPos))
                    {
-                       Console.WriteLine("CHECKMATE");
+                       Console.WriteLine("CHECKMATE - BLACK WON");
                        return;
                    }
                    
@@ -185,7 +185,7 @@ class Program
                     
                     if (checkMateService.IsCheckMateForWhite(chessBoardCopy, xPos, yPos))
                     {
-                        Console.WriteLine("CHECKMATE"); 
+                        Console.WriteLine("CHECKMATE - WHITE WON"); 
                         return;
                     }
                     
