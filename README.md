@@ -1,5 +1,9 @@
 #ChessConsoleGame App#
 
+DEMO VERSION
+FULL VERSION COMING UP:
+https://github.com/oh306028/chessASCII
+
 Project made in .NET using C#. 
 Tried to improve coding skills, writing unit tests. 
 
